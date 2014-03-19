@@ -18,8 +18,8 @@ public class Avaruusalus {
     private int y;
 
     public Avaruusalus() {
-        this.x = 30;
-        this.y = 30;
+        this.x = 190;
+        this.y = 330;
     }
 
     public void siirra(int dx, int dy) {
@@ -37,6 +37,10 @@ public class Avaruusalus {
 
     public void piirra(Graphics graphics) {
         graphics.setColor(Color.BLUE);
-        graphics.fillRect(getX(), getY(), 20, 10);
+        graphics.fillRect(getX(), getY(), 10, 20);
+    }
+    
+    public void ammu() {
+        System.out.println("piu piu");
     }
 }

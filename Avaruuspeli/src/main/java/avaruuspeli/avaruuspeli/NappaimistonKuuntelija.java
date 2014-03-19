@@ -32,13 +32,15 @@ public class NappaimistonKuuntelija implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            alus.siirra(-1, 0);
+            alus.siirra(-10, 0);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            alus.siirra(1, 0);
+            alus.siirra(10, 0);
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            alus.siirra(0, -1);
+            alus.siirra(0, -10);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            alus.siirra(0, 1);
+            alus.siirra(0, 10);
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            alus.ammu();
         }
         component.repaint();
     }

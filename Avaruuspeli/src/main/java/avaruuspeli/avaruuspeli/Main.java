@@ -5,10 +5,14 @@ import javax.swing.SwingUtilities;
 public class Main {
 
     public static void main(String[] args) {
-        
-        Avaruusalus alus = new Avaruusalus() {};
 
-        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(alus);
+        Pelimaailma maailma = new Pelimaailma();
+
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(maailma);
         SwingUtilities.invokeLater(kayttoliittyma);
+
+        Pelimoottori moottori = new Pelimoottori(kayttoliittyma, maailma);
+
+        moottori.start();
     }
 }

@@ -18,11 +18,11 @@ import javax.swing.*;
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
-    private Avaruusalus alus;
+    private Pelimaailma maailma;
     private Piirtoalusta pa;
 
-    public Kayttoliittyma(Avaruusalus alus) {
-        this.alus = alus;
+    public Kayttoliittyma(Pelimaailma maailma) {
+        this.maailma = maailma;
     }
 
     @Override
@@ -42,16 +42,25 @@ public class Kayttoliittyma implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
-        pa = new Piirtoalusta(alus);
+        pa = new Piirtoalusta(maailma);
         container.add(pa);
     }
 
     private void lisaaKuuntelijat() {
 
-        frame.addKeyListener(new NappaimistonKuuntelija(pa, alus));
+        frame.addKeyListener(new NappaimistonKuuntelija(pa, maailma.getAlus()));
     }
 
     public JFrame getFrame() {
         return frame;
     }
+    
+    public void piirra() {
+        if (pa == null) {
+            return;
+        }
+
+        pa.repaint();
+    }
+  
 }

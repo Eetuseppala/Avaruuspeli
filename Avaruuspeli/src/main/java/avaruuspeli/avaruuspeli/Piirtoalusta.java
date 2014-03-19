@@ -16,11 +16,13 @@ import javax.swing.JPanel;
  */
 public class Piirtoalusta extends JPanel {
      
+    private Pelimaailma maailma;
     private Avaruusalus alus;
  
-    public Piirtoalusta(Avaruusalus alus) {
+    public Piirtoalusta(Pelimaailma maailma) {
         super.setBackground(Color.BLACK);
-        this.alus = alus;
+        this.maailma = maailma;
+        this.alus = maailma.getAlus();
     }
  
     @Override
