@@ -75,7 +75,7 @@ public class Avaruusalus implements Runnable {
     }
 
     public void piirra(Graphics g) {
-        g.setColor(Color.YELLOW);
+        g.setColor(Color.ORANGE);
         g.fillRect(alus.x, alus.y, alus.width, alus.height);
     }
 
@@ -84,7 +84,7 @@ public class Avaruusalus implements Runnable {
         try {
             while (true) {
                 liiku();
-                Thread.sleep(6);
+                Thread.sleep(4);
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
