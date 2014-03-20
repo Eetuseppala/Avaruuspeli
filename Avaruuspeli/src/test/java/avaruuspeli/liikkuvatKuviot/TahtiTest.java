@@ -67,7 +67,5 @@ public class TahtiTest {
         Tahti tahti = new Tahti();
         
         assertEquals(tahti.ySuunta, 1);
-    }
-    
-    
+    }    
 }
