@@ -8,7 +8,10 @@ import java.awt.event.KeyEvent;
 public class Avaruusalus implements Runnable {
 
     int x, y, ySuunta, xSuunta;
+    int ammusX, ammusY;
     Rectangle alus;
+    Rectangle ammus;
+    boolean valmisAmpumaan, ammuttu = false;
 
     public Avaruusalus(int x, int y) {
         this.x = x;
@@ -31,6 +34,18 @@ public class Avaruusalus implements Runnable {
         if (e.getKeyCode() == e.VK_RIGHT) {
             setXSuunta(1);
         }
+        
+        if (e.getKeyCode() == e.VK_SPACE) {
+            if(ammus == null) 
+                valmisAmpumaan = true;
+            
+            if(valmisAmpumaan) {
+                ammusX = alus.x;
+                ammusY = alus.y;
+                ammus = new Rectangle(ammusX, ammusY, 3, 5);
+                ammuttu = true;
+            }
+        }
     }
 
     public void keyReleased(KeyEvent e) {
@@ -47,6 +62,15 @@ public class Avaruusalus implements Runnable {
         }
         if (e.getKeyCode() == e.VK_RIGHT) {
             setXSuunta(0);
+        }
+        
+        if (e.getKeyCode() == e.VK_SPACE) {
+            valmisAmpumaan = false;
+            if(ammus.y <= -5) {
+                ammus = new Rectangle(0, 0, 0, 0); //ei voi laittaa null
+                ammuttu = false;
+                valmisAmpumaan = true;
+            }
         }
     }
 
@@ -73,16 +97,27 @@ public class Avaruusalus implements Runnable {
         else if(alus.x >= 485)
             alus.x = 485;
     }
+    
+    public void ammu() {
+        if(ammuttu) 
+            ammus.y--;
+    }
 
     public void piirra(Graphics g) {
         g.setColor(Color.ORANGE);
         g.fillRect(alus.x, alus.y, alus.width, alus.height);
+        
+        if(ammuttu) {
+            g.setColor(Color.RED);
+            g.fillRect(ammus.x, ammus.y, ammus.width, ammus.height);
+        }
     }
 
     @Override
     public void run() {
         try {
             while (true) {
+                ammu();
                 liiku();
                 Thread.sleep(4);
             }

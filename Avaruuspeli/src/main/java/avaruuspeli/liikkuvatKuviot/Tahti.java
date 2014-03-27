@@ -36,8 +36,12 @@ public class Tahti implements Runnable {
     public void run() {
         try {
             while (true) {
+                if (tahti.y > 585) {
+                    tahti.y = 0;
+                    tahti.x = xArvonArpominen();
+                }
                 liiku();
-                Thread.sleep(7);
+                Thread.sleep(10);
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
