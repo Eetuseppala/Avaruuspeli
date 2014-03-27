@@ -39,25 +39,4 @@ public class MainTest {
     @After
     public void tearDown() {
     }
-
-    @Test
-    public void pelikenttaOikeanVarinen() {
-        Main paaohjelma = new Main();
-
-        assertEquals(paaohjelma.getBackground(), Color.BLACK);
-    }
-
-    @Test
-    public void ohjelmanVoiSulkeaRastista() {
-        Main paaohjelma = new Main();
-
-        assertEquals(paaohjelma.getDefaultCloseOperation(), JFrame.EXIT_ON_CLOSE);
-    }
-
-    @Test
-    public void ikkunaOikeanKokoinen() {
-        Main paaohjelma = new Main();
-
-        assertEquals(paaohjelma.getSize(), new Dimension(500,600));
-    }
 }

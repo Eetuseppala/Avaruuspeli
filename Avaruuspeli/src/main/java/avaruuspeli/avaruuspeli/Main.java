@@ -13,5 +13,8 @@ public class Main extends JFrame {
         
         Thread liikkuvatTahdet = new Thread(ikkuna.tahdet);
         liikkuvatTahdet.start();
+        
+        Thread liikkuvatAsteroidit = new Thread(ikkuna.asteroidit);
+        liikkuvatAsteroidit.start();
     }
 }

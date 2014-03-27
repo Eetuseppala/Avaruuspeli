@@ -11,7 +11,7 @@ public class Avaruusalus implements Runnable {
     int x, y, ySuunta, xSuunta;
     int ammusX, ammusY;
     Rectangle alus;
-    boolean valmisAmpumaan;
+    Asteroidikentta asteroidit;
 
     private ArrayList<Rectangle> ammukset = new ArrayList();
 
@@ -39,14 +39,10 @@ public class Avaruusalus implements Runnable {
 
         if (e.getKeyCode() == e.VK_SPACE) {
             
-            valmisAmpumaan = true;
+                ammusX = alus.x +4;
+                ammusY = alus.y -4;
 
-            if (valmisAmpumaan) {
-                ammusX = alus.x;
-                ammusY = alus.y;
-
-                ammukset.add(new Rectangle(ammusX + 4, ammusY - 4, 3, 5));
-            }
+                ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
         }
     }
 
@@ -67,14 +63,15 @@ public class Avaruusalus implements Runnable {
         }
 
         if (e.getKeyCode() == e.VK_SPACE) {
-            valmisAmpumaan = true;
+            
+            Rectangle poistettavaAmmus = null;
 
             for (Rectangle ammus : ammukset) {
                 if (ammus.y <= -5) {
-                    ammus = new Rectangle(0, 0, 0, 0); //ei voi laittaa null
-                    valmisAmpumaan = true;
+                    poistettavaAmmus = ammus;
                 }
-            }
+            }      
+            ammukset.remove(poistettavaAmmus);
         }
     }
 
@@ -109,13 +106,29 @@ public class Avaruusalus implements Runnable {
             ammus.y--;
         }
     }
+    
+    //Koitan tätä ensi viikolla, en saanut toimimaan vielä
+    
+//    public void osuma() {
+//        for (Rectangle ammus : ammukset) {
+//            
+//            for (Rectangle asteroidi : asteroidit.getAsteroidit()) {
+//                
+//                if(ammus.intersects(asteroidi)) {
+//                    asteroidit.tuhoudu(asteroidi);
+//                }
+//            }
+//        }
+//    }
+    
+    
 
     public void piirra(Graphics g) {
-        g.setColor(Color.CYAN);
+        g.setColor(Color.GRAY);
         g.fillRect(alus.x, alus.y, alus.width, alus.height);
 
         for (Rectangle ammus: ammukset) {
-            g.setColor(Color.RED);
+            g.setColor(Color.GREEN);
             g.fillRect(ammus.x, ammus.y, ammus.width, ammus.height);
         }
     }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package avaruuspeli.liikkuvatKuviot;
 
 import org.junit.After;
@@ -12,11 +8,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Eetu
- */
 public class AvaruusalusTest {
+    private Asteroidikentta ak;
 
     public AvaruusalusTest() {
     }
@@ -39,6 +32,7 @@ public class AvaruusalusTest {
 
     @Test
     public void suunnanVaihtaminenVasemmalleOnnistuu() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
         Avaruusalus alus = new Avaruusalus(250, 300);
 
         alus.setYSuunta(-1);

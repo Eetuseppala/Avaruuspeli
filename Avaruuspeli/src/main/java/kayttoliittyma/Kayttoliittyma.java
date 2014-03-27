@@ -1,5 +1,6 @@
 package kayttoliittyma;
 
+import avaruuspeli.liikkuvatKuviot.Asteroidikentta;
 import avaruuspeli.liikkuvatKuviot.Avaruusalus;
 import avaruuspeli.liikkuvatKuviot.Tahtitaivas;
 import java.awt.Color;
@@ -16,10 +17,12 @@ public class Kayttoliittyma extends JFrame {
 
     Image kuva;
     Graphics grafiikat;
-
-    public static Avaruusalus alus = new Avaruusalus(250, 300); //Pelaajan liikuteltava alus
     
     public static Tahtitaivas tahdet = new Tahtitaivas();
+    
+    public static Asteroidikentta asteroidit = new Asteroidikentta();
+    
+    public static Avaruusalus alus = new Avaruusalus(250, 300); //Pelaajan liikuteltava alus
 
     int leveys = 500,
             korkeus = 600;
@@ -46,9 +49,12 @@ public class Kayttoliittyma extends JFrame {
     }
 
     public void piirra(Graphics g) {
-        alus.piirra(g);
 
         tahdet.piirra(g);
+        
+        asteroidit.piirra(g);
+        
+        alus.piirra(g);
         
         repaint();
     }
