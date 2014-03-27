@@ -11,3 +11,11 @@ Tuskastelin useita tunteja sekä aamulla että illalla avaruusaluksen animaation k
 Sain aamulla uuden pohjatoteutuksen valmiiksi pelistä ja tarkemmin sanoen avaruusaluksen liikkumisesta. Kuvan päivitys on nopeaa ja avaruusalus liikkuu smoothisti. Sen lisäksi aloin tekemään tähtiä (taustalla liikkuvia, jotta näyttäisi että alus liikkuu) ja suunnittelemaan miten teen asteroidit.
 
 Ohjelmointiin kului usea tunti ja sen jälkeen tein parisen tuntia vielä testejä. Sitten sain konfiguroitua pitin ja piirsin vielä luokkakaavion. Yhteensä päivän aikana projektiin tuli käytettyä reilut 8 tuntia.
+
+26.3.2014
+
+Ohjelmoin melkein koko yön eli noin 7 tuntia. Sain aikaiseksi liikkuvan tähtitaivaan ja alustavan ampumismekanismin avaruusalukselle.
+
+27.3.2014
+
+Ohjelmoin ja tein testejä parhaan osaamiseni mukaan noin 7 tuntia. Sain aikaiseksi asteroidit. Yritin saada aikaan sen, että ampuessa asteroidi tuhoutuu, mutten onnistunut vielä. Se jääköön siis ensi viikolle. Ohjelmoinnin jälkeen sitten päivittelin luokkakaaviota ja kirjoitin tämän.
