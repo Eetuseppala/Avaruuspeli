@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Avaruusalus implements Runnable {
 
@@ -11,7 +12,9 @@ public class Avaruusalus implements Runnable {
     int ammusX, ammusY;
     Rectangle alus;
     Rectangle ammus;
-    boolean valmisAmpumaan, ammuttu = false;
+    boolean valmisAmpumaan;
+
+    private ArrayList<Rectangle> ammukset = new ArrayList();
 
     public Avaruusalus(int x, int y) {
         this.x = x;
@@ -34,16 +37,16 @@ public class Avaruusalus implements Runnable {
         if (e.getKeyCode() == e.VK_RIGHT) {
             setXSuunta(1);
         }
-        
+
         if (e.getKeyCode() == e.VK_SPACE) {
-            if(ammus == null) 
-                valmisAmpumaan = true;
             
-            if(valmisAmpumaan) {
+            valmisAmpumaan = true;
+
+            if (valmisAmpumaan) {
                 ammusX = alus.x;
                 ammusY = alus.y;
-                ammus = new Rectangle(ammusX, ammusY, 3, 5);
-                ammuttu = true;
+
+                ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
             }
         }
     }
@@ -63,13 +66,15 @@ public class Avaruusalus implements Runnable {
         if (e.getKeyCode() == e.VK_RIGHT) {
             setXSuunta(0);
         }
-        
+
         if (e.getKeyCode() == e.VK_SPACE) {
-            valmisAmpumaan = false;
-            if(ammus.y <= -5) {
-                ammus = new Rectangle(0, 0, 0, 0); //ei voi laittaa null
-                ammuttu = false;
-                valmisAmpumaan = true;
+            valmisAmpumaan = true;
+
+            for (Rectangle ammus : ammukset) {
+                if (ammus.y <= -5) {
+                    ammus = new Rectangle(0, 0, 0, 0); //ei voi laittaa null
+                    valmisAmpumaan = true;
+                }
             }
         }
     }
@@ -84,31 +89,34 @@ public class Avaruusalus implements Runnable {
 
     public void liiku() {
         alus.y += ySuunta;
-        
-        if(alus.y <= 25)
+
+        if (alus.y <= 25) {
             alus.y = 25;
-        else if(alus.y >= 575)
+        } else if (alus.y >= 575) {
             alus.y = 575;
-        
+        }
+
         alus.x += xSuunta;
-        
-        if(alus.x <= 5)
+
+        if (alus.x <= 5) {
             alus.x = 5;
-        else if(alus.x >= 485)
+        } else if (alus.x >= 485) {
             alus.x = 485;
+        }
     }
-    
+
     public void ammu() {
-        if(ammuttu) 
+        for (Rectangle ammus : ammukset) {
             ammus.y--;
+        }
     }
 
     public void piirra(Graphics g) {
         g.setColor(Color.ORANGE);
         g.fillRect(alus.x, alus.y, alus.width, alus.height);
-        
-        if(ammuttu) {
-            g.setColor(Color.RED);
+
+        for (Rectangle ammus: ammukset) {
+            g.setColor(Color.GREEN);
             g.fillRect(ammus.x, ammus.y, ammus.width, ammus.height);
         }
     }

@@ -63,7 +63,7 @@
   </properties>
   <testcase time="0" classname="avaruuspeli.liikkuvatKuviot.AvaruusalusTest" name="suunnanVaihtaminenOikealleOnnistuu"/>
   <testcase time="0" classname="avaruuspeli.liikkuvatKuviot.AvaruusalusTest" name="suunnanVaihtaminenVasemmalleOnnistuu"/>
-  <testcase time="0" classname="avaruuspeli.liikkuvatKuviot.AvaruusalusTest" name="ylosMeneminenOnnistuu"/>
-  <testcase time="0" classname="avaruuspeli.liikkuvatKuviot.AvaruusalusTest" name="alusAloittaaOikeastaKohdasta"/>
   <testcase time="0" classname="avaruuspeli.liikkuvatKuviot.AvaruusalusTest" name="alasMeneminenOnnistuu"/>
+  <testcase time="0" classname="avaruuspeli.liikkuvatKuviot.AvaruusalusTest" name="alusAloittaaOikeastaKohdasta"/>
+  <testcase time="0" classname="avaruuspeli.liikkuvatKuviot.AvaruusalusTest" name="ylosMeneminenOnnistuu"/>
 </testsuite>
