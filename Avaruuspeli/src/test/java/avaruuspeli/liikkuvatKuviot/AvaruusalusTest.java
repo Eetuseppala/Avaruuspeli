@@ -1,6 +1,9 @@
-
 package avaruuspeli.liikkuvatKuviot;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -9,6 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AvaruusalusTest {
+
     private Asteroidikentta ak;
 
     public AvaruusalusTest() {
@@ -72,5 +76,18 @@ public class AvaruusalusTest {
         Avaruusalus alus = new Avaruusalus(250, 300);
         assertEquals(alus.x, 250);
         assertEquals(alus.y, 300);
+    }
+
+    @Test
+    public void alusPysyyRajojenSisapuolella() {
+        Avaruusalus alus = new Avaruusalus(250, 300);
+        
+        alus.y = 25;
+        
+        alus.ySuunta = -1;
+        
+        alus.liiku();
+        
+        assertEquals(alus.y, 25);
     }
 }

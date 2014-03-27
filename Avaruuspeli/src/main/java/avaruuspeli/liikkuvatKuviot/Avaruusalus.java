@@ -38,11 +38,11 @@ public class Avaruusalus implements Runnable {
         }
 
         if (e.getKeyCode() == e.VK_SPACE) {
-            
-                ammusX = alus.x +4;
-                ammusY = alus.y -4;
 
-                ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
+            ammusX = alus.x + 4;
+            ammusY = alus.y - 4;
+
+            ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
         }
     }
 
@@ -63,14 +63,14 @@ public class Avaruusalus implements Runnable {
         }
 
         if (e.getKeyCode() == e.VK_SPACE) {
-            
+
             Rectangle poistettavaAmmus = null;
 
             for (Rectangle ammus : ammukset) {
                 if (ammus.y <= -5) {
                     poistettavaAmmus = ammus;
                 }
-            }      
+            }
             ammukset.remove(poistettavaAmmus);
         }
     }
@@ -81,6 +81,14 @@ public class Avaruusalus implements Runnable {
 
     public void setXSuunta(int uusiSuunta) {
         xSuunta = uusiSuunta;
+    }
+
+    public int getYSuunta() {
+        return this.ySuunta;
+    }
+
+    public int getXSuunta() {
+        return this.xSuunta;
     }
 
     public void liiku() {
@@ -106,9 +114,8 @@ public class Avaruusalus implements Runnable {
             ammus.y--;
         }
     }
-    
+
     //Koitan tätä ensi viikolla, en saanut toimimaan vielä
-    
 //    public void osuma() {
 //        for (Rectangle ammus : ammukset) {
 //            
@@ -120,14 +127,11 @@ public class Avaruusalus implements Runnable {
 //            }
 //        }
 //    }
-    
-    
-
     public void piirra(Graphics g) {
         g.setColor(Color.GRAY);
         g.fillRect(alus.x, alus.y, alus.width, alus.height);
 
-        for (Rectangle ammus: ammukset) {
+        for (Rectangle ammus : ammukset) {
             g.setColor(Color.GREEN);
             g.fillRect(ammus.x, ammus.y, ammus.width, ammus.height);
         }

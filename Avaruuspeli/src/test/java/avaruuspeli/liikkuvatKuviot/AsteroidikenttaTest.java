@@ -1,5 +1,7 @@
 package avaruuspeli.liikkuvatKuviot;
 
+import java.awt.Rectangle;
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -93,6 +95,24 @@ public class AsteroidikenttaTest {
         Asteroidikentta asteroidi = new Asteroidikentta();
 
         assertEquals(asteroidi.ySuunta, 1);
+    }
+
+    @Test
+    public void liikuMetodiToimii() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        ArrayList<Rectangle> asteroidilista = new ArrayList();
+        
+        Rectangle asteroidi = new Rectangle(200, 200, 15, 10);
+        
+        asteroidilista.add(asteroidi);
+        
+        int entinenY = asteroidi.y;
+        
+        asteroidikentta.liiku();
+        
+        assertEquals(asteroidi.y, entinenY);
+        
+        //Tää testaa jotenkin väärin, huoh. En keksinyt.
     }
 
 }

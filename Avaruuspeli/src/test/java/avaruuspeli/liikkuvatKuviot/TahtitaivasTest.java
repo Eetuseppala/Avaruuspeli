@@ -1,5 +1,7 @@
 package avaruuspeli.liikkuvatKuviot;
 
+import java.awt.Rectangle;
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -97,5 +99,23 @@ public class TahtitaivasTest {
         Tahtitaivas tahti = new Tahtitaivas();
 
         assertEquals(tahti.ySuunta, 1);
+    }
+
+    @Test
+    public void liikuMetodiToimii() {
+        Tahtitaivas tahtitaivas = new Tahtitaivas();
+        ArrayList<Rectangle> tahtilista = new ArrayList();
+
+        Rectangle tahti = new Rectangle(200, 200, 1, 1);
+
+        tahtilista.add(tahti);
+
+        int entinenY = tahti.y;
+
+        tahtitaivas.liiku();
+
+        assertEquals(tahti.y, entinenY);
+
+        //Tääkin testaa jotenkin "väärin" nyt. Ens viikolla koitan korjata.
     }
 }
