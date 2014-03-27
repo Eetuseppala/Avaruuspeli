@@ -1,8 +1,7 @@
 package kayttoliittyma;
 
 import avaruuspeli.liikkuvatKuviot.Avaruusalus;
-import avaruuspeli.liikkuvatKuviot.Tahti;
-import avaruuspeli.liikkuvatKuviot.Tahtikokoelma;
+import avaruuspeli.liikkuvatKuviot.Tahtitaivas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -20,13 +19,7 @@ public class Kayttoliittyma extends JFrame {
 
     public static Avaruusalus alus = new Avaruusalus(250, 300); //Pelaajan liikuteltava alus
     
-    //Tähdet tähdet
-    public static Tahti tahti1 = new Tahti();
-    public static Tahti tahti2 = new Tahti();
-    public static Tahti tahti3 = new Tahti();
-    public static Tahti tahti4 = new Tahti();
-    
-    public Tahtikokoelma tahdet = new Tahtikokoelma(grafiikat);
+    public static Tahtitaivas tahdet = new Tahtitaivas();
 
     int leveys = 500,
             korkeus = 600;
@@ -42,10 +35,6 @@ public class Kayttoliittyma extends JFrame {
         this.setVisible(true);
         this.setBackground(Color.BLACK);
         this.addKeyListener(new Kuuntelija());
-        tahdet.lisaaTahti(tahti1);
-        tahdet.lisaaTahti(tahti2);
-        tahdet.lisaaTahti(tahti3);
-        tahdet.lisaaTahti(tahti4);
     }
 
     @Override
@@ -59,10 +48,7 @@ public class Kayttoliittyma extends JFrame {
     public void piirra(Graphics g) {
         alus.piirra(g);
 
-        tahti1.piirra(g);
-        tahti2.piirra(g);
-        tahti3.piirra(g);
-        tahti4.piirra(g);
+        tahdet.piirra(g);
         
         repaint();
     }

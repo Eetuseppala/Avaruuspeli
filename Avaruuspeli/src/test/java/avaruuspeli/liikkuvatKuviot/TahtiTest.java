@@ -43,7 +43,7 @@ public class TahtiTest {
         
         //Tämä testi on ehkä vähän huono? En keksinyt kattavaa ja nopeaa testiä
         
-        Tahti tahti = new Tahti();
+        Tahtitaivas tahti = new Tahtitaivas();
         
         int xArvo = tahti.x;
         boolean toimii = false;
@@ -57,14 +57,14 @@ public class TahtiTest {
     
     @Test
     public void tahtiEiLiikuVaakasuunnassa() {
-        Tahti tahti = new Tahti();
+        Tahtitaivas tahti = new Tahtitaivas();
         
         assertEquals(tahti.y, 0);
     }
     
     @Test
     public void tahtiLiikkuuAlas() {
-        Tahti tahti = new Tahti();
+        Tahtitaivas tahti = new Tahtitaivas();
         
         assertEquals(tahti.ySuunta, 1);
     }    

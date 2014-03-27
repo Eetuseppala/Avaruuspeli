@@ -11,7 +11,6 @@ public class Avaruusalus implements Runnable {
     int x, y, ySuunta, xSuunta;
     int ammusX, ammusY;
     Rectangle alus;
-    Rectangle ammus;
     boolean valmisAmpumaan;
 
     private ArrayList<Rectangle> ammukset = new ArrayList();
@@ -46,7 +45,7 @@ public class Avaruusalus implements Runnable {
                 ammusX = alus.x;
                 ammusY = alus.y;
 
-                ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
+                ammukset.add(new Rectangle(ammusX + 4, ammusY - 4, 3, 5));
             }
         }
     }
@@ -112,11 +111,11 @@ public class Avaruusalus implements Runnable {
     }
 
     public void piirra(Graphics g) {
-        g.setColor(Color.ORANGE);
+        g.setColor(Color.CYAN);
         g.fillRect(alus.x, alus.y, alus.width, alus.height);
 
         for (Rectangle ammus: ammukset) {
-            g.setColor(Color.GREEN);
+            g.setColor(Color.RED);
             g.fillRect(ammus.x, ammus.y, ammus.width, ammus.height);
         }
     }
