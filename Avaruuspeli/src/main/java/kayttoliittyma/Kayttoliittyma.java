@@ -17,12 +17,12 @@ public class Kayttoliittyma extends JFrame {
 
     Image kuva;
     Graphics grafiikat;
-    
+
     public static Tahtitaivas tahdet = new Tahtitaivas();
-    
+
     public static Asteroidikentta asteroidit = new Asteroidikentta();
-    
-    public static Avaruusalus alus = new Avaruusalus(250, 300); //Pelaajan liikuteltava alus
+
+    public static Avaruusalus alus = new Avaruusalus(250, 300, asteroidit); //Pelaajan liikuteltava alus
 
     int leveys = 500,
             korkeus = 600;
@@ -51,11 +51,19 @@ public class Kayttoliittyma extends JFrame {
     public void piirra(Graphics g) {
 
         tahdet.piirra(g);
-        
+
         asteroidit.piirra(g);
-        
+
         alus.piirra(g);
-        
+
+        g.setColor(Color.GREEN);
+        g.drawString("Pisteet: " + alus.getPisteet(), 10, 50);
+
+        if (alus.pelaajaKuollut) {
+            g.setColor(Color.RED);
+            g.drawString("KUOLIT!", 230, 300);
+        }
+
         repaint();
     }
 

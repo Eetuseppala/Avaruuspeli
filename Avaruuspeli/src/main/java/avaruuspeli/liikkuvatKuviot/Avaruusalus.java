@@ -12,13 +12,16 @@ public class Avaruusalus implements Runnable {
     int ammusX, ammusY;
     Rectangle alus;
     Asteroidikentta asteroidit;
+    int pisteet = 0;
+    public boolean pelaajaKuollut = false;
 
     private ArrayList<Rectangle> ammukset = new ArrayList();
 
-    public Avaruusalus(int x, int y) {
+    public Avaruusalus(int x, int y, Asteroidikentta asteroidikentta) {
         this.x = x;
         this.y = y;
         alus = new Rectangle(x, y, 10, 20);
+        this.asteroidit = asteroidikentta;
     }
 
     public void keyPressed(KeyEvent e) {
@@ -39,10 +42,12 @@ public class Avaruusalus implements Runnable {
 
         if (e.getKeyCode() == e.VK_SPACE) {
 
-            ammusX = alus.x + 4;
-            ammusY = alus.y - 4;
+            if (!pelaajaKuollut) {
+                ammusX = alus.x + 4;
+                ammusY = alus.y - 4;
 
-            ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
+                ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
+            }
         }
     }
 
@@ -115,18 +120,34 @@ public class Avaruusalus implements Runnable {
         }
     }
 
-    //Koitan tätä ensi viikolla, en saanut toimimaan vielä
-//    public void osuma() {
-//        for (Rectangle ammus : ammukset) {
-//            
-//            for (Rectangle asteroidi : asteroidit.getAsteroidit()) {
-//                
-//                if(ammus.intersects(asteroidi)) {
-//                    asteroidit.tuhoudu(asteroidi);
-//                }
-//            }
-//        }
-//    }
+    public void osuma() {
+        for (Rectangle ammus : ammukset) {
+
+            for (Rectangle asteroidi : asteroidit.getAsteroidit()) {
+
+                if (ammus.intersects(asteroidi)) {
+                    asteroidit.tuhoudu(asteroidi);
+                    pisteet += 10;
+                    ammus.height = 0;
+                    ammus.width = 0;
+                }
+            }
+        }
+
+        for (Rectangle asteroidi : asteroidit.getAsteroidit()) {
+
+            if (asteroidi.intersects(alus)) {
+                alus.height = 0;
+                alus.width = 0;
+                pelaajaKuollut = true;
+            }
+        }
+    }
+
+    public int getPisteet() {
+        return this.pisteet;
+    }
+
     public void piirra(Graphics g) {
         g.setColor(Color.GRAY);
         g.fillRect(alus.x, alus.y, alus.width, alus.height);
@@ -142,6 +163,7 @@ public class Avaruusalus implements Runnable {
         try {
             while (true) {
                 ammu();
+                osuma();
                 liiku();
                 Thread.sleep(4);
             }

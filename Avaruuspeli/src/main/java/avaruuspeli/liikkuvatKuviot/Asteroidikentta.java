@@ -17,7 +17,7 @@ public class Asteroidikentta implements Runnable {
     public Asteroidikentta() {
         ySuunta = 1;
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 25; i++) {
             this.x = xArvonArpominen();
             this.y = yArvonArpominen();
             Rectangle asteroidi = new Rectangle(x, y, 15, 10);
@@ -36,13 +36,13 @@ public class Asteroidikentta implements Runnable {
         int arpa = r.nextInt(600);
         return arpa;
     }
-    
+
     public void piirra(Graphics g) {
 
         for (Rectangle asteroidi : asteroidit) {
             g.setColor(new Color(156, 93, 82));
             g.fillRect(asteroidi.x, asteroidi.y, asteroidi.width, asteroidi.height);
-            g.fillRect(asteroidi.x+2, asteroidi.y-2, asteroidi.width-4, asteroidi.height+4);
+            g.fillRect(asteroidi.x + 2, asteroidi.y - 2, asteroidi.width - 4, asteroidi.height + 4);
         }
     }
 
@@ -60,6 +60,8 @@ public class Asteroidikentta implements Runnable {
                     if (asteroidi.y > 585) {
                         asteroidi.y = 0;
                         asteroidi.x = xArvonArpominen();
+                        asteroidi.height = 10;
+                        asteroidi.width = 15;
                     }
                 }
                 liiku();
@@ -68,6 +70,15 @@ public class Asteroidikentta implements Runnable {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    public Iterable<Rectangle> getAsteroidit() {
+        return this.asteroidit;
+    }
+
+    public void tuhoudu(Rectangle asteroidi) {
+        asteroidi.width = 0;
+        asteroidi.height = 0;
     }
 
 }

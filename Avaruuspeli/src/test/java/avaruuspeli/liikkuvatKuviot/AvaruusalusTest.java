@@ -37,7 +37,7 @@ public class AvaruusalusTest {
     @Test
     public void suunnanVaihtaminenVasemmalleOnnistuu() {
         Asteroidikentta asteroidikentta = new Asteroidikentta();
-        Avaruusalus alus = new Avaruusalus(250, 300);
+        Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta);
 
         alus.setYSuunta(-1);
 
@@ -46,7 +46,8 @@ public class AvaruusalusTest {
 
     @Test
     public void suunnanVaihtaminenOikealleOnnistuu() {
-        Avaruusalus alus = new Avaruusalus(250, 300);
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta);
 
         alus.setYSuunta(1);
 
@@ -55,7 +56,8 @@ public class AvaruusalusTest {
 
     @Test
     public void ylosMeneminenOnnistuu() {
-        Avaruusalus alus = new Avaruusalus(250, 300);
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta);
 
         alus.setXSuunta(-1);
 
@@ -64,7 +66,8 @@ public class AvaruusalusTest {
 
     @Test
     public void alasMeneminenOnnistuu() {
-        Avaruusalus alus = new Avaruusalus(250, 300);
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta);
 
         alus.setXSuunta(1);
 
@@ -73,14 +76,16 @@ public class AvaruusalusTest {
 
     @Test
     public void alusAloittaaOikeastaKohdasta() {
-        Avaruusalus alus = new Avaruusalus(250, 300);
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta);
         assertEquals(alus.x, 250);
         assertEquals(alus.y, 300);
     }
 
     @Test
     public void alusPysyyRajojenSisapuolella() {
-        Avaruusalus alus = new Avaruusalus(250, 300);
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta);
         
         alus.y = 25;
         
