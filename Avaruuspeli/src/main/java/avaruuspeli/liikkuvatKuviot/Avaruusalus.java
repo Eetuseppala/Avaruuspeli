@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Avaruusalus implements Runnable {
 
@@ -14,6 +16,7 @@ public class Avaruusalus implements Runnable {
     Asteroidikentta asteroidit;
     int pisteet = 0;
     public boolean pelaajaKuollut = false;
+    public int aikaaEdellisestaAmmuksesta = 0;
 
     private ArrayList<Rectangle> ammukset = new ArrayList();
 
@@ -42,11 +45,12 @@ public class Avaruusalus implements Runnable {
 
         if (e.getKeyCode() == e.VK_SPACE) {
 
-            if (!pelaajaKuollut) {
+            if (!pelaajaKuollut && aikaaEdellisestaAmmuksesta <= 0) {
                 ammusX = alus.x + 4;
                 ammusY = alus.y - 4;
 
                 ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
+                aikaaEdellisestaAmmuksesta = 100;
             }
         }
     }
@@ -68,6 +72,18 @@ public class Avaruusalus implements Runnable {
         }
 
         if (e.getKeyCode() == e.VK_SPACE) {
+            Rectangle poistettavaAmmus = null;
+            boolean poistetaan = false;
+
+            for (Rectangle ammus : ammukset) {
+                if (ammus.y <= -20) {
+                    poistettavaAmmus = ammus;
+                    poistetaan = true;
+                }
+            }
+            if (poistetaan) {
+                ammukset.remove(poistettavaAmmus);
+            }
         }
     }
 
@@ -112,15 +128,16 @@ public class Avaruusalus implements Runnable {
     }
 
     public void osuma() {
-        for (Rectangle ammus : ammukset) {
+        
+        for (int i = 0; i < ammukset.size() ; i++) {
 
             for (Rectangle asteroidi : asteroidit.getAsteroidit()) {
 
-                if (ammus.intersects(asteroidi)) {
+                if (ammukset.get(i).intersects(asteroidi)) {
                     asteroidit.tuhoudu(asteroidi);
                     pisteet += 10;
-                    ammus.height = 0;
-                    ammus.width = 0;
+                    ammukset.get(i).height = 0;
+                    ammukset.get(i).width = 0;
                 }
             }
         }
@@ -135,28 +152,15 @@ public class Avaruusalus implements Runnable {
         }
     }
 
-    public void poistaHavinneetAmmukset() {
-        Rectangle poistettavaAmmus = null;
-        boolean poistetaan = false;
-
-        for (Rectangle ammus : ammukset) {
-            if (ammus.y <= -5) {
-                poistettavaAmmus = ammus;
-                poistetaan = true;
-            }
-        }
-        if (poistetaan) {
-            ammukset.remove(poistettavaAmmus);
-        }
-    }
-
     public int getPisteet() {
         return this.pisteet;
     }
 
     public void piirra(Graphics g) {
-        g.setColor(Color.GRAY);
+        g.setColor(Color.BLUE);
         g.fillRect(alus.x, alus.y, alus.width, alus.height);
+        g.setColor(Color.CYAN);
+        g.fillRect(alus.x + 2, alus.y + 2, alus.width - 3, alus.height - 15);
 
         for (Rectangle ammus : ammukset) {
             g.setColor(Color.GREEN);
@@ -168,14 +172,15 @@ public class Avaruusalus implements Runnable {
     public void run() {
         try {
             while (true) {
+                aikaaEdellisestaAmmuksesta--;
                 liiku();
                 ammu();
                 osuma();
-                poistaHavinneetAmmukset();
                 Thread.sleep(4);
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
+            Logger.getLogger(Avaruusalus.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 

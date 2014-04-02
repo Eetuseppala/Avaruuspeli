@@ -31,10 +31,11 @@ public class Kayttoliittyma extends JFrame {
     private Kuuntelija kuuntelija = new Kuuntelija();
 
     public Kayttoliittyma() {
-        this.setTitle("Avaruuspeli");
+        this.setTitle("Avaruusraivaaja");
         this.setSize(ruudunKoko);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setBackground(Color.BLACK);
         this.addKeyListener(new Kuuntelija());
