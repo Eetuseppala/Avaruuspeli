@@ -68,15 +68,6 @@ public class Avaruusalus implements Runnable {
         }
 
         if (e.getKeyCode() == e.VK_SPACE) {
-
-            Rectangle poistettavaAmmus = null;
-
-            for (Rectangle ammus : ammukset) {
-                if (ammus.y <= -5) {
-                    poistettavaAmmus = ammus;
-                }
-            }
-            ammukset.remove(poistettavaAmmus);
         }
     }
 
@@ -116,7 +107,7 @@ public class Avaruusalus implements Runnable {
 
     public void ammu() {
         for (Rectangle ammus : ammukset) {
-            ammus.y--;
+            ammus.y -= 2;
         }
     }
 
@@ -144,6 +135,21 @@ public class Avaruusalus implements Runnable {
         }
     }
 
+    public void poistaHavinneetAmmukset() {
+        Rectangle poistettavaAmmus = null;
+        boolean poistetaan = false;
+
+        for (Rectangle ammus : ammukset) {
+            if (ammus.y <= -5) {
+                poistettavaAmmus = ammus;
+                poistetaan = true;
+            }
+        }
+        if (poistetaan) {
+            ammukset.remove(poistettavaAmmus);
+        }
+    }
+
     public int getPisteet() {
         return this.pisteet;
     }
@@ -162,9 +168,10 @@ public class Avaruusalus implements Runnable {
     public void run() {
         try {
             while (true) {
+                liiku();
                 ammu();
                 osuma();
-                liiku();
+                poistaHavinneetAmmukset();
                 Thread.sleep(4);
             }
         } catch (Exception e) {
