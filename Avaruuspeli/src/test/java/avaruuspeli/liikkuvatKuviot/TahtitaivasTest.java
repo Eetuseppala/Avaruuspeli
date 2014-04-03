@@ -104,18 +104,15 @@ public class TahtitaivasTest {
     @Test
     public void liikuMetodiToimii() {
         Tahtitaivas tahtitaivas = new Tahtitaivas();
-        ArrayList<Rectangle> tahtilista = new ArrayList();
 
         Rectangle tahti = new Rectangle(200, 200, 1, 1);
 
-        tahtilista.add(tahti);
+        tahtitaivas.tahdet.add(tahti);
 
         int entinenY = tahti.y;
 
         tahtitaivas.liiku();
 
-        assertEquals(tahti.y, entinenY);
-
-        //Tääkin testaa jotenkin "väärin" nyt. Ens viikolla koitan korjata.
+        assertEquals(tahti.y, entinenY + 1);
     }
 }

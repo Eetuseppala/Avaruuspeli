@@ -19,3 +19,11 @@ Ohjelmoin melkein koko yön eli noin 7 tuntia. Sain aikaiseksi liikkuvan tähtitai
 27.3.2014
 
 Ohjelmoin ja tein testejä parhaan osaamiseni mukaan noin 7 tuntia. Sain aikaiseksi asteroidit. Yritin saada aikaan sen, että ampuessa asteroidi tuhoutuu, mutten onnistunut vielä. Se jääköön siis ensi viikolle. Ohjelmoinnin jälkeen sitten päivittelin luokkakaaviota ja kirjoitin tämän.
+
+2.4.2014
+
+Ohjelmointia tuli tehtyä noin viidestä kuuteen tuntiin. Lisäsin peliin mahdollisuuden ampua asteroideja jolloin ne tuhoutuvat ja ikkunan yläkulmaan päivittyy pelaajan pisteet. Myöskin pelaaja voi tuhoutua osumalla asteroidiin, jolloin alus "räjähtää" ja näyttöön tulee ilmoitus pelaajan kuolemasta. Korjasin myös pari bugia ampumiseen liittyen. Nyt ei voi ampua hullua sarjatulta, vaan ampumisen mahdollisuutta hoitaa yksinkertainen ajastin.
+
+3.4.2014
+
+Ohjelmoin, tein testejä, aloittelin javadocia varovasti ja tein pari sekvenssikaaviota. Aikaa tuli käytettyä noin 7 tuntia. Ohjelmaan tuli toteutettua viimein varhainen versio vihollislaivueesta. Tällä hetkellä ne vain lentävät ja ampuvat mutta eivät reagoi mihinkään mitenkään. Toisin sanoen ne on vain "piirretty" peliin. Tämän luokan osalta osumantunnistukset osoittautuivatkin hieman hankalammiksi kuin edelliset tapaukset, joten pääsen jatkamaan tästä myös ensi viikolla. 

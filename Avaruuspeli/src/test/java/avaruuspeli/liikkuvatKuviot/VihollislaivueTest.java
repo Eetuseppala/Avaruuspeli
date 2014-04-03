@@ -1,7 +1,6 @@
 package avaruuspeli.liikkuvatKuviot;
 
 import java.awt.Rectangle;
-import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -9,9 +8,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class AsteroidikenttaTest {
+public class VihollislaivueTest {
 
-    public AsteroidikenttaTest() {
+    public VihollislaivueTest() {
     }
 
     @BeforeClass
@@ -33,12 +32,12 @@ public class AsteroidikenttaTest {
     @Test
     public void xArvotaanOikein() {
 
-        Asteroidikentta asteroidit = new Asteroidikentta();
+        Vihollislaivue viholliset = new Vihollislaivue();
 
         boolean toimii = true;
 
         for (int i = 0; i < 1000; i++) {
-            int xArvo = asteroidit.xArvonArpominen();
+            int xArvo = viholliset.xArvonArpominen();
 
             if (xArvo < 0 || xArvo > 500) {
                 toimii = false;
@@ -50,12 +49,12 @@ public class AsteroidikenttaTest {
     @Test
     public void yArvotaanOikein() {
 
-        Asteroidikentta asteroidit = new Asteroidikentta();
+        Vihollislaivue viholliset = new Vihollislaivue();
 
         boolean toimii = true;
 
         for (int i = 0; i < 1000; i++) {
-            int yArvo = asteroidit.xArvonArpominen();
+            int yArvo = viholliset.xArvonArpominen();
 
             if (yArvo < 0 || yArvo > 600) {
                 toimii = false;
@@ -65,12 +64,12 @@ public class AsteroidikenttaTest {
     }
 
     @Test
-    public void asteroidinXKoordinaattiKelvollinen() {
-        Asteroidikentta asteroidi = new Asteroidikentta();
+    public void laivueenXKoordinaattiKelvollinen() {
+        Vihollislaivue viholliset = new Vihollislaivue();
 
         boolean kelvollinen = false;
 
-        if (asteroidi.x > 0 && asteroidi.x < 500) {
+        if (viholliset.x > 0 && viholliset.x < 500) {
             kelvollinen = true;
         }
 
@@ -78,12 +77,12 @@ public class AsteroidikenttaTest {
     }
 
     @Test
-    public void asteroidinYKoordinaattiKelvollinen() {
-        Asteroidikentta asteroidi = new Asteroidikentta();
+    public void laivueenYKoordinaattiKelvollinen() {
+        Vihollislaivue viholliset = new Vihollislaivue();
 
         boolean kelvollinen = false;
 
-        if (asteroidi.y > 0 && asteroidi.y < 600) {
+        if (viholliset.y > 0 && viholliset.y < 600) {
             kelvollinen = true;
         }
 
@@ -91,25 +90,24 @@ public class AsteroidikenttaTest {
     }
 
     @Test
-    public void asteroiditLiikkuvatAlas() {
-        Asteroidikentta asteroidi = new Asteroidikentta();
+    public void vihollisaluksetLiikkuvatAlas() {
+        Vihollislaivue viholliset = new Vihollislaivue();
 
-        assertEquals(asteroidi.ySuunta, 1);
+        assertEquals(viholliset.ySuunta, 1);
     }
 
     @Test
     public void liikuMetodiToimii() {
-        Asteroidikentta asteroidikentta = new Asteroidikentta();
-        
+        Vihollislaivue viholliset = new Vihollislaivue();
+
         Rectangle asteroidi = new Rectangle(200, 200, 15, 10);
-        
-        asteroidikentta.asteroidit.add(asteroidi);
-        
+
+        viholliset.viholliset.add(asteroidi);
+
         int entinenY = asteroidi.y;
-        
-        asteroidikentta.liiku();
-        
+
+        viholliset.liiku();
+
         assertEquals(asteroidi.y, entinenY + 1);
     }
-
 }

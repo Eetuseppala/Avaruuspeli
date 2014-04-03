@@ -1,3 +1,8 @@
+/* 
+ * Tämä on luokka, joka pitää sisällään kokoelman Rectangle-tyyppisiä tähtiä
+ * ja niihin liittyviä metodeja
+ */
+
 package avaruuspeli.liikkuvatKuviot;
 
 import java.awt.Color;
@@ -10,7 +15,7 @@ public class Tahtitaivas implements Runnable {
 
     int x, y, ySuunta;
 
-    private ArrayList<Rectangle> tahdet = new ArrayList();
+    ArrayList<Rectangle> tahdet = new ArrayList();
 
     public Tahtitaivas() {
         ySuunta = 1;

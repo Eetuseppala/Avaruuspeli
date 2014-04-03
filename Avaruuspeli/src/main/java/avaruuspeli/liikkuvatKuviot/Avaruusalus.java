@@ -1,3 +1,7 @@
+/* 
+ * Tässä luokassa on pelaajan ohjaama avaruusalus ja siihen liittyvät metodit
+ * 
+ */
 package avaruuspeli.liikkuvatKuviot;
 
 import java.awt.Color;
@@ -14,19 +18,37 @@ public class Avaruusalus implements Runnable {
     int ammusX, ammusY;
     Rectangle alus;
     Asteroidikentta asteroidit;
+    Vihollislaivue viholliset;
     int pisteet = 0;
     public boolean pelaajaKuollut = false;
     public int aikaaEdellisestaAmmuksesta = 0;
+    ArrayList<Rectangle> ammukset = new ArrayList();
 
-    private ArrayList<Rectangle> ammukset = new ArrayList();
-
-    public Avaruusalus(int x, int y, Asteroidikentta asteroidikentta) {
+    /* 
+     * Avaruusalus-luokan konstruktorissa luodaan alusta kuvaava Rectangle-tyyppinen objekti
+     * ja annetaan avaruusalukselle tieto asteroideista ja vihollisista, joita se tarvitsee
+     *
+     * @param   x   avaruusaluksen sijainnin x-arvo
+     *
+     * @param   y   avaruusaluksen sijainnin y-arvo
+     *
+     * @param   asteroidikentta   avaruusalus tarvitsee tiedon pelin asteroideista
+     *
+     * @param   vihollislaivue   avaruusalus tarvitsee tiedon pelin vihollisista
+     */
+    public Avaruusalus(int x, int y, Asteroidikentta asteroidikentta, Vihollislaivue vihollislaivue) {
         this.x = x;
         this.y = y;
         alus = new Rectangle(x, y, 10, 20);
         this.asteroidit = asteroidikentta;
+        this.viholliset = vihollislaivue;
     }
 
+
+    /* 
+     * Avaruusaluksen kontrollointiin (käyttäjän ohjaamana) osallistuva metodi
+     * 
+     */
     public void keyPressed(KeyEvent e) {
 
         if (e.getKeyCode() == e.VK_UP) {
@@ -55,6 +77,10 @@ public class Avaruusalus implements Runnable {
         }
     }
 
+    /* 
+     * Avaruusaluksen kontrollointiin (käyttäjän ohjaamana) osallistuva metodi
+     * 
+     */
     public void keyReleased(KeyEvent e) {
 
         if (e.getKeyCode() == e.VK_UP) {
@@ -87,10 +113,20 @@ public class Avaruusalus implements Runnable {
         }
     }
 
+    /* 
+     * Muuttaa avaruusaluksen suuntaa y-akselilla
+     * 
+     * @param   uusiSuunta   haluttu uusi suunta y-akselilla
+     */
     public void setYSuunta(int uusiSuunta) {
         ySuunta = uusiSuunta;
     }
 
+    /* 
+     * Muuttaa avaruusaluksen suuntaa x-akselilla
+     * 
+     * @param   uusiSuunta   haluttu uusi suunta x-akselilla
+     */
     public void setXSuunta(int uusiSuunta) {
         xSuunta = uusiSuunta;
     }
@@ -121,15 +157,19 @@ public class Avaruusalus implements Runnable {
         }
     }
 
-    public void ammu() {
+    public void liikutaAmmuksia() {
         for (Rectangle ammus : ammukset) {
             ammus.y -= 2;
         }
     }
+    
+    public int getAmmuksenY(int i) {
+        return ammukset.get(i).y;
+    }
 
     public void osuma() {
-        
-        for (int i = 0; i < ammukset.size() ; i++) {
+
+        for (int i = 0; i < ammukset.size(); i++) {
 
             for (Rectangle asteroidi : asteroidit.getAsteroidit()) {
 
@@ -174,7 +214,7 @@ public class Avaruusalus implements Runnable {
             while (true) {
                 aikaaEdellisestaAmmuksesta--;
                 liiku();
-                ammu();
+                liikutaAmmuksia();
                 osuma();
                 Thread.sleep(4);
             }

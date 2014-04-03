@@ -1,3 +1,8 @@
+/* 
+ * Ohjelman pääluokka, joka käynnistää käyttöliittymän, luo threadit ja käynnistää ne.
+ * 
+ */
+
 package avaruuspeli.avaruuspeli;
 
 import javax.swing.*;
@@ -16,5 +21,8 @@ public class Main extends JFrame {
         
         Thread liikkuvatAsteroidit = new Thread(ikkuna.asteroidit);
         liikkuvatAsteroidit.start();
+        
+        Thread vihut = new Thread(ikkuna.viholliset);
+        vihut.start();
     }
 }

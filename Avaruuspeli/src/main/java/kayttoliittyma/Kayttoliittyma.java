@@ -1,8 +1,14 @@
+/* 
+ * Tämä on Main-metodin käynnistämä käyttöliittymä pelille.
+ * 
+ */
+
 package kayttoliittyma;
 
 import avaruuspeli.liikkuvatKuviot.Asteroidikentta;
 import avaruuspeli.liikkuvatKuviot.Avaruusalus;
 import avaruuspeli.liikkuvatKuviot.Tahtitaivas;
+import avaruuspeli.liikkuvatKuviot.Vihollislaivue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -21,8 +27,10 @@ public class Kayttoliittyma extends JFrame {
     public static Tahtitaivas tahdet = new Tahtitaivas();
 
     public static Asteroidikentta asteroidit = new Asteroidikentta();
+    
+    public static Vihollislaivue viholliset = new Vihollislaivue();
 
-    public static Avaruusalus alus = new Avaruusalus(250, 300, asteroidit); //Pelaajan liikuteltava alus
+    public static Avaruusalus alus = new Avaruusalus(250, 300, asteroidit, viholliset); //Pelaajan liikuteltava alus
 
     int leveys = 500,
             korkeus = 600;
@@ -54,6 +62,8 @@ public class Kayttoliittyma extends JFrame {
         tahdet.piirra(g);
 
         asteroidit.piirra(g);
+        
+        viholliset.piirra(g);
 
         alus.piirra(g);
 
