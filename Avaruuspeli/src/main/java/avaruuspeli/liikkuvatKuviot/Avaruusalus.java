@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,7 +20,8 @@ public class Avaruusalus implements Runnable {
     Rectangle alus;
     Asteroidikentta asteroidit;
     Vihollislaivue viholliset;
-    int pisteet = 0;
+    public int pisteet = 0;
+    public int parasTulos = 0;
     public boolean pelaajaKuollut = false;
     public int aikaaEdellisestaAmmuksesta = 0;
     ArrayList<Rectangle> ammukset = new ArrayList();
@@ -216,9 +218,33 @@ public class Avaruusalus implements Runnable {
             }
         }
     }
+    
+    public void osumaVihollisenAmmukseen() {
+        
+        Iterator<Rectangle> iteraattori = viholliset.ammukset.iterator(); //Herjasi exceptioneita niin piti tehdä näin
+        
+        while(iteraattori.hasNext()) {
+            if(iteraattori.next().intersects(alus)) {
+                alus.height = 0;
+                alus.width = 0;
+                pelaajaKuollut = true;
+            }
+        }
+    }
 
     public int getPisteet() {
         return this.pisteet;
+    }
+    
+    public void nollaaPisteet() {
+        this.pisteet = 0;
+    }
+    
+    public void heraaHenkiin() {
+        alus.height = 20;
+        alus.width = 10;
+        alus.x = 250;
+        alus.y = 300;              
     }
 
     public void piirra(Graphics g) {
@@ -240,6 +266,7 @@ public class Avaruusalus implements Runnable {
                 liikutaAmmuksia();
                 osumaAsteroidiin();
                 osumaViholliseen();
+                osumaVihollisenAmmukseen();
                 Thread.sleep(4);
             }
         } catch (Exception e) {

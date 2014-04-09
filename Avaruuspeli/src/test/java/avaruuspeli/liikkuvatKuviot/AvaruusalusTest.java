@@ -38,7 +38,7 @@ public class AvaruusalusTest {
     @Test
     public void suunnanVaihtaminenVasemmalleOnnistuu() {
         Asteroidikentta asteroidikentta = new Asteroidikentta();
-        Vihollislaivue vihollislaivue = new Vihollislaivue();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
         Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta, vihollislaivue);
 
         alus.setYSuunta(-1);
@@ -49,7 +49,7 @@ public class AvaruusalusTest {
     @Test
     public void suunnanVaihtaminenOikealleOnnistuu() {
         Asteroidikentta asteroidikentta = new Asteroidikentta();
-        Vihollislaivue vihollislaivue = new Vihollislaivue();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
         Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta, vihollislaivue);
 
         alus.setYSuunta(1);
@@ -60,7 +60,7 @@ public class AvaruusalusTest {
     @Test
     public void ylosMeneminenOnnistuu() {
         Asteroidikentta asteroidikentta = new Asteroidikentta();
-        Vihollislaivue vihollislaivue = new Vihollislaivue();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
         Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta, vihollislaivue);
 
         alus.setXSuunta(-1);
@@ -71,7 +71,7 @@ public class AvaruusalusTest {
     @Test
     public void alasMeneminenOnnistuu() {
         Asteroidikentta asteroidikentta = new Asteroidikentta();
-        Vihollislaivue vihollislaivue = new Vihollislaivue();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
         Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta, vihollislaivue);
 
         alus.setXSuunta(1);
@@ -82,7 +82,7 @@ public class AvaruusalusTest {
     @Test
     public void alusAloittaaOikeastaKohdasta() {
         Asteroidikentta asteroidikentta = new Asteroidikentta();
-        Vihollislaivue vihollislaivue = new Vihollislaivue();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
         Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta, vihollislaivue);
         assertEquals(alus.x, 250);
         assertEquals(alus.y, 300);
@@ -91,7 +91,7 @@ public class AvaruusalusTest {
     @Test
     public void alusPysyyRajojenSisapuolella() {
         Asteroidikentta asteroidikentta = new Asteroidikentta();
-        Vihollislaivue vihollislaivue = new Vihollislaivue();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
         Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta, vihollislaivue);
 
         alus.y = 25;
@@ -106,7 +106,7 @@ public class AvaruusalusTest {
     @Test
     public void ammuksetLiikkuu() {
         Asteroidikentta asteroidikentta = new Asteroidikentta();
-        Vihollislaivue vihollislaivue = new Vihollislaivue();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
         Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta, vihollislaivue);
         
         alus.ammukset.add(new Rectangle(300, 300, 3, 5));

@@ -31,8 +31,8 @@ public class VihollislaivueTest {
 
     @Test
     public void xArvotaanOikein() {
-
-        Vihollislaivue viholliset = new Vihollislaivue();
+        Asteroidikentta asteroidit = new Asteroidikentta();
+        Vihollislaivue viholliset = new Vihollislaivue(asteroidit);
 
         boolean toimii = true;
 
@@ -48,8 +48,8 @@ public class VihollislaivueTest {
 
     @Test
     public void yArvotaanOikein() {
-
-        Vihollislaivue viholliset = new Vihollislaivue();
+        Asteroidikentta asteroidit = new Asteroidikentta();
+        Vihollislaivue viholliset = new Vihollislaivue(asteroidit);
 
         boolean toimii = true;
 
@@ -65,7 +65,8 @@ public class VihollislaivueTest {
 
     @Test
     public void laivueenXKoordinaattiKelvollinen() {
-        Vihollislaivue viholliset = new Vihollislaivue();
+        Asteroidikentta asteroidit = new Asteroidikentta();
+        Vihollislaivue viholliset = new Vihollislaivue(asteroidit);
 
         boolean kelvollinen = false;
 
@@ -78,7 +79,8 @@ public class VihollislaivueTest {
 
     @Test
     public void laivueenYKoordinaattiKelvollinen() {
-        Vihollislaivue viholliset = new Vihollislaivue();
+        Asteroidikentta asteroidit = new Asteroidikentta();
+        Vihollislaivue viholliset = new Vihollislaivue(asteroidit);
 
         boolean kelvollinen = false;
 
@@ -91,14 +93,16 @@ public class VihollislaivueTest {
 
     @Test
     public void vihollisaluksetLiikkuvatAlas() {
-        Vihollislaivue viholliset = new Vihollislaivue();
+        Asteroidikentta asteroidit = new Asteroidikentta();
+        Vihollislaivue viholliset = new Vihollislaivue(asteroidit);
 
         assertEquals(viholliset.ySuunta, 1);
     }
 
     @Test
     public void liikuMetodiToimii() {
-        Vihollislaivue viholliset = new Vihollislaivue();
+        Asteroidikentta asteroidit = new Asteroidikentta();
+        Vihollislaivue viholliset = new Vihollislaivue(asteroidit);
 
         Rectangle asteroidi = new Rectangle(200, 200, 15, 10);
 
