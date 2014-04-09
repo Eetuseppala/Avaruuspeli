@@ -1,8 +1,7 @@
 /* 
  * Tämä luokka pitää sisällään joukon Rectangle-tyyppisiä vihollisia
  * ja metodeja niihin liittyen 
-*/
-
+ */
 package avaruuspeli.liikkuvatKuviot;
 
 import java.awt.Color;
@@ -50,7 +49,7 @@ public class Vihollislaivue implements Runnable {
         g.setColor(Color.MAGENTA);
 
         for (Rectangle vihollinen : viholliset) {
-            g.fillRect(vihollinen.x, vihollinen.y, 10, 20);
+            g.fillRect(vihollinen.x, vihollinen.y, vihollinen.width, vihollinen.height);
         }
 
         for (int i = 0; i < ammukset.size(); i++) {
@@ -66,12 +65,16 @@ public class Vihollislaivue implements Runnable {
     }
 
     public void ammu() {
+
         if (viivemittari <= 0) {
             for (Rectangle vihollinen : viholliset) {
-                ammusX = vihollinen.x + 4;
-                ammusY = vihollinen.y + 16;
 
-                ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
+                if (vihollinen.height == 20) {   //Testataan käytännössä onko alus tuhoutunut vai ei: tuhoutuneella 0
+                    ammusX = vihollinen.x + 4;
+                    ammusY = vihollinen.y + 16;
+
+                    ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
+                }
             }
             viivemittari = 200;
         }
@@ -83,8 +86,16 @@ public class Vihollislaivue implements Runnable {
         }
     }
 
+    public Iterable<Rectangle> getViholliset() {
+        return this.viholliset;
+    }
+
+    public void tuhoudu(Rectangle vihollinen) {
+        vihollinen.height = 0;
+        vihollinen.height = 0;
+    }
+
     //Seuraava jää ensi viikon viimeistelyksi, tällä viikolla ei onnannut
-    
 //    public void osuma() {
 //
 //        for (int i = 0; i < ammukset.size(); i++) {
@@ -111,7 +122,6 @@ public class Vihollislaivue implements Runnable {
 //            }
 //        }
 //    }
-
     @Override
     public void run() {
         try {
@@ -120,6 +130,8 @@ public class Vihollislaivue implements Runnable {
                     if (vihollinen.y > 595) {
                         vihollinen.y = 0;
                         vihollinen.x = xArvonArpominen();
+                        vihollinen.width = 10;
+                        vihollinen.height = 20;
                     }
                 }
                 liiku();

@@ -162,12 +162,12 @@ public class Avaruusalus implements Runnable {
             ammus.y -= 2;
         }
     }
-    
+
     public int getAmmuksenY(int i) {
         return ammukset.get(i).y;
     }
 
-    public void osuma() {
+    public void osumaAsteroidiin() {
 
         for (int i = 0; i < ammukset.size(); i++) {
 
@@ -192,6 +192,31 @@ public class Avaruusalus implements Runnable {
         }
     }
 
+    public void osumaViholliseen() {
+
+        for (int i = 0; i < ammukset.size(); i++) {
+
+            for (Rectangle vihollinen : viholliset.getViholliset()) {
+
+                if (ammukset.get(i).intersects(vihollinen)) {
+                    viholliset.tuhoudu(vihollinen);
+                    pisteet += 30;
+                    ammukset.get(i).height = 0;
+                    ammukset.get(i).width = 0;
+                }
+            }
+        }
+
+        for (Rectangle vihollinen : viholliset.getViholliset()) {
+
+            if (vihollinen.intersects(alus)) {
+                alus.height = 0;
+                alus.width = 0;
+                pelaajaKuollut = true;
+            }
+        }
+    }
+
     public int getPisteet() {
         return this.pisteet;
     }
@@ -199,8 +224,6 @@ public class Avaruusalus implements Runnable {
     public void piirra(Graphics g) {
         g.setColor(Color.BLUE);
         g.fillRect(alus.x, alus.y, alus.width, alus.height);
-        g.setColor(Color.CYAN);
-        g.fillRect(alus.x + 2, alus.y + 2, alus.width - 3, alus.height - 15);
 
         for (Rectangle ammus : ammukset) {
             g.setColor(Color.GREEN);
@@ -215,7 +238,8 @@ public class Avaruusalus implements Runnable {
                 aikaaEdellisestaAmmuksesta--;
                 liiku();
                 liikutaAmmuksia();
-                osuma();
+                osumaAsteroidiin();
+                osumaViholliseen();
                 Thread.sleep(4);
             }
         } catch (Exception e) {
