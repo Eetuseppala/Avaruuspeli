@@ -17,6 +17,10 @@ public class Tahtitaivas implements Runnable {
 
     ArrayList<Rectangle> tahdet = new ArrayList();
 
+     /* 
+     * Tässä konstruktorissa luodaan uusi Rectangle-tyyppisten tähtien joukko,
+     * jota tämä peli kierrättää.
+     */
     public Tahtitaivas() {
         ySuunta = 1;
 
@@ -28,12 +32,20 @@ public class Tahtitaivas implements Runnable {
         }
     }
 
+    /* 
+     * Yksittäiselle Rectangle-tyyppiselle tähdelle määritellään satunnainen x-koordinaatti
+     * peli-ikkunan puitteissa.
+     */
     public int xArvonArpominen() {
         Random r = new Random();
         int arpa = r.nextInt(500);
         return arpa;
     }
 
+    /* 
+     * Yksittäiselle Rectangle-tyyppiselle tähdelle määritellään satunnainen y-koordinaatti
+     * peli-ikkunan puitteissa.
+     */
     public int yArvonArpominen() {
         Random r = new Random();
         int arpa = r.nextInt(600);
@@ -48,6 +60,9 @@ public class Tahtitaivas implements Runnable {
         }
     }
 
+    /* 
+     * Muuttaa tähden suuntaa.
+     */
     public void liiku() {
         for (Rectangle tahti : tahdet) {
             tahti.y += ySuunta;

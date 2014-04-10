@@ -62,6 +62,9 @@ public class Asteroidikentta implements Runnable {
         }
     }
 
+    /* 
+     * Muuttaa asteroidin suuntaa.
+     */
     public void liiku() {
         for (Rectangle asteroidi : asteroidit) {
             asteroidi.y += ySuunta;

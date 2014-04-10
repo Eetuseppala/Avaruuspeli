@@ -69,6 +69,9 @@ public class Kayttoliittyma extends JFrame {
         g.drawImage(kuva, 0, 0, this);
     }
 
+     /* 
+     * Tässä metodissa piirretään pelimaailman/ikkunan sisältö tilanteen mukaan.
+     */
     public void piirra(Graphics g) {
 
         tahdet.piirra(g);
@@ -109,6 +112,10 @@ public class Kayttoliittyma extends JFrame {
         return alus;
     }
 
+     /* 
+     * Nimensä mukaisesti käynnistetään peli ja siihen liittyvät Threadit (paitsi tähdet,
+     * jotka jo ovat käynnissä).
+     */
     public void kaynnistaPeli() {
         peliKaynnissa = true;
         avaruusalus.start();
@@ -116,6 +123,9 @@ public class Kayttoliittyma extends JFrame {
         vihut.start();
     }
 
+     /* 
+     * Tämä seuraa näppäimistön painalluksia.
+     */
     public class Kuuntelija extends KeyAdapter {
 
         @Override
@@ -129,6 +139,9 @@ public class Kayttoliittyma extends JFrame {
         }
     }
 
+    /* 
+     * Tämä seuraa hiiren painalluksia.
+     */
     public class Hiirikuuntelija extends MouseAdapter {
 
         @Override
