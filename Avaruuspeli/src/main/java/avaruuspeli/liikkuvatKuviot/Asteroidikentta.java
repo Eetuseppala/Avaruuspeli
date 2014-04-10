@@ -2,7 +2,6 @@
  * Tämä on luokka, joka pitää sisällään kokoelman Rectangle-tyyppisiä asteroideja
  * ja niihin liittyviä metodeja
  */
-
 package avaruuspeli.liikkuvatKuviot;
 
 import java.awt.Color;
@@ -19,9 +18,13 @@ public class Asteroidikentta implements Runnable {
 
     ArrayList<Rectangle> asteroidit = new ArrayList();
 
+    /* 
+     * Tässä konstruktorissa luodaan uusi Rectangle-tyyppisten asteroidien joukko,
+     * jota tämä peli kierrättää.
+     */
     public Asteroidikentta() {
         ySuunta = 1;
-        
+
         for (int i = 0; i < 25; i++) {
             this.x = xArvonArpominen();
             this.y = yArvonArpominen();
@@ -29,13 +32,21 @@ public class Asteroidikentta implements Runnable {
             asteroidit.add(asteroidi);
         }
     }
-
+    
+    /* 
+     * Yksittäiselle Rectangle-tyyppiselle asteroidille määritellään satunnainen x-koordinaatti
+     * peli-ikkunan puitteissa.
+     */
     public int xArvonArpominen() {
         Random r = new Random();
         int arpa = r.nextInt(500);
         return arpa;
     }
 
+    /* 
+     * Yksittäiselle Rectangle-tyyppiselle asteroidille määritellään satunnainen y-koordinaatti
+     * peli-ikkunan puitteissa.
+     */
     public int yArvonArpominen() {
         Random r = new Random();
         int arpa = r.nextInt(600);

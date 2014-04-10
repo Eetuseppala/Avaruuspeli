@@ -125,7 +125,10 @@ public class Avaruusalus implements Runnable {
     public int getXSuunta() {
         return this.xSuunta;
     }
-
+    
+    /* 
+     * Muuttaa aluksen suunnan
+     */
     public void liiku() {
         alus.y += ySuunta;
 
@@ -144,12 +147,19 @@ public class Avaruusalus implements Runnable {
         }
     }
 
+    /* 
+     * Nimensä mukaisesti liikuttaa pelaajan ampumia ammuksia eteenpäin
+     */
     public void liikutaAmmuksia() {
         for (Rectangle ammus : ammukset) {
             ammus.y -= 2;
         }
     }
 
+    
+    /* 
+     * Nimensä mukaisesti poistaa näkyvistä hävinneet ammukset
+     */
     public void poistaNakyvistaHavinneetAmmukset() {
 
         for (Rectangle ammus : ammukset) {
@@ -160,6 +170,12 @@ public class Avaruusalus implements Runnable {
         }
     }
 
+    
+    /* 
+     * Testaa, osuuko mikään pelaajan ammuksista mihinkään asteroidiin.
+     * Jos näin on niin ko. asteroidi tuhoutuu. Sen jälkeen katsotaan osuuko toisaalta
+     * pelaaja yhteenkään asteroidiin. Jos näin on niin pelaaja kuolee.
+     */
     public void osumaAsteroidiin() {
 
         for (int i = 0; i < ammukset.size(); i++) {
@@ -183,6 +199,12 @@ public class Avaruusalus implements Runnable {
         }
     }
 
+    
+    /* 
+     * Testaa, osuuko mikään pelaajan ammuksista mihinkään viholliseen.
+     * Jos näin on niin ko. vihollinen tuhoutuu. Sen jälkeen katsotaan osuuko toisaalta
+     * pelaaja yhteenkään viholliseen. Jos näin on niin pelaaja kuolee.
+     */
     public void osumaViholliseen() {
 
         for (int i = 0; i < ammukset.size(); i++) {
@@ -206,6 +228,10 @@ public class Avaruusalus implements Runnable {
         }
     }
 
+    /* 
+     * Testaa, osuuko pelaaja yhteenkään vihollisten ammuksista.
+     * Jos näin on niin pelaaja kuolee.
+     */
     public void osumaVihollisenAmmukseen() {
 
         if (!viholliset.vihollisenAmmusKasittelyssa) {  //estetään concurrentModificationException
@@ -228,19 +254,30 @@ public class Avaruusalus implements Runnable {
         this.pisteet = 0;
     }
 
+    /* 
+     * Kun pelaaja kuolee ja painaa sen jälkeen RESTART-nappia, niin tätä
+     * metodia kutsutaan. Silloin pelaaja herää henkiin ja näkyy jälleen.
+     */
     public void heraaHenkiin() {
         alus.height = 20;
         alus.width = 10;
         alus.x = 250;
         alus.y = 300;
     }
-
+    
+    /* 
+     * Tätä metodia kutsutaan kun pelaaja kuolee.
+     */
     public void kuole() {
         alus.height = 0;
         alus.width = 0;
         pelaajaKuollut = true;
     }
 
+    /* 
+     * Säännöt pelaajan ja pelaajan ammusten piirtämiseen. Määrittää miltä pelaaja näyttää ja miltä 
+     * pelaajan ammukset näyttävät.
+     */
     public void piirra(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect(alus.x, alus.y, alus.width, alus.height);

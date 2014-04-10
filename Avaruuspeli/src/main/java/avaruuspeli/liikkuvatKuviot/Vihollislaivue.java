@@ -22,9 +22,15 @@ public class Vihollislaivue implements Runnable {
     int pisteet = 0;
     public int viivemittari = 0;
     public boolean vihollisenAmmusKasittelyssa = false; //Estämään concurrentModificationExceptionit.
-    Avaruusalus alus;
     Asteroidikentta asteroidit;
 
+    /* 
+     * Vihollislaivue-luokan konstruktorissa määritellään uusi Rectangle-tyyppisten
+     * vihollisten joukko. Näitä vihollisia peli "kierrättää".
+     *
+     * @param   asteroidit  Vihollislaivue tarvitsee tiedon asteroideista, jotta voisi
+     *                      tuhota niitä ja tuhoutua niihin.
+     */
     public Vihollislaivue(Asteroidikentta asteroidit) {
 
         for (int i = 0; i < 8; i++) {
@@ -34,22 +40,33 @@ public class Vihollislaivue implements Runnable {
             viholliset.add(vihollinen);
 //            eiPaallekkaisiaVihollisia();
         }
-        this.alus = alus;
         this.asteroidit = asteroidit;
     }
 
+    /* 
+     * Yksittäiselle Rectangle-tyyppiselle viholliselle määritellään satunnainen x-koordinaatti
+     * peli-ikkunan puitteissa.
+     */
     public int xArvonArpominen() {
         Random r = new Random();
         int arpa = r.nextInt(500);
         return arpa;
     }
 
+    /* 
+     * Yksittäiselle Rectangle-tyyppiselle viholliselle määritellään satunnainen y-koordinaatti
+     * peli-ikkunan puitteissa.
+     */
     public int yArvonArpominen() {
         Random r = new Random();
         int arpa = r.nextInt(600);
         return arpa;
     }
 
+    /* 
+     * Tämä metodi määrää, minkä näköisiksi viholliset ja niiden
+     * ammukset piirretään.
+     */
     public void piirra(Graphics g) {
         g.setColor(Color.GREEN);
 
@@ -63,15 +80,23 @@ public class Vihollislaivue implements Runnable {
         }
     }
 
+    /* 
+     * Tämä metodi liikuttaa vihollisia ySuunta-nimisen oliomuuttujan mukaan.
+     * Tässä pelissä sen arvo on aina 1 (alaspäin).
+     */
     public void liiku() {
         for (Rectangle vihollisalus : viholliset) {
             vihollisalus.y += ySuunta;
         }
     }
 
+    /* 
+     * Tämä metodi saa viholliset ampumaan yhtä aikaa (toteutuksellinen valintani).
+     * Viivemittari määrittää ampumistiheyden.
+     */
     public void ammu() {
 
-        vihollisenAmmusKasittelyssa = true;
+        vihollisenAmmusKasittelyssa = true; // Tämä pieni temppu estää ConcurrentModificationExceptionin
 
         if (viivemittari <= 0) {
             for (Rectangle vihollinen : viholliset) {
@@ -88,6 +113,10 @@ public class Vihollislaivue implements Runnable {
         vihollisenAmmusKasittelyssa = false;
     }
 
+    /* 
+     * Tämä metodi liikuttaa vihollisten ammuksia.
+     * ammus.y:n muokkaaminen vaikuttaa vihollisten ammusten nopeuteen.
+     */
     public void liikutaAmmuksia() {
         for (Rectangle ammus : ammukset) {
             ammus.y += 5;
@@ -98,11 +127,19 @@ public class Vihollislaivue implements Runnable {
         return this.viholliset;
     }
 
+    /* 
+     * Tätä metodia kutsutaan, kun tietyn vihollisen täytyy tuhoutua.
+     */
     public void tuhoudu(Rectangle vihollinen) {
         vihollinen.height = 0;
         vihollinen.width = 0;
     }
 
+    /* 
+     * Tässä metodissa tarkistetaan osuuko mikään vihollisten ammuksista mihinkään asteroidiin.
+     * Jos näin on niin sellaiset asteroidit tuhoutuvat. Sen jälkeen katsotaan toisaalta osuuko
+     * mikään asteroideista yhteenkään viholliseen. Tämän sattuessa ko. vihollinen tuhoutuu.
+     */
     public void osumaAsteroidiin() {
 
         for (int i = 0; i < ammukset.size(); i++) {

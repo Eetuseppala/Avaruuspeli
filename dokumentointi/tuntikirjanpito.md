@@ -27,3 +27,11 @@ Ohjelmointia tuli tehtyä noin viidestä kuuteen tuntiin. Lisäsin peliin mahdollis
 3.4.2014
 
 Ohjelmoin, tein testejä, aloittelin javadocia varovasti ja tein pari sekvenssikaaviota. Aikaa tuli käytettyä noin 7 tuntia. Ohjelmaan tuli toteutettua viimein varhainen versio vihollislaivueesta. Tällä hetkellä ne vain lentävät ja ampuvat mutta eivät reagoi mihinkään mitenkään. Toisin sanoen ne on vain "piirretty" peliin. Tämän luokan osalta osumantunnistukset osoittautuivatkin hieman hankalammiksi kuin edelliset tapaukset, joten pääsen jatkamaan tästä myös ensi viikolla. 
+
+9.4.2014
+
+Ohjelmoin muutamia tunteja ja sain viholliset toimimaan pelissä. Tämän lisäksi tein Menun pelille josta voi aloittaa pelin. Pelaajan kuollessa voi myös painaa Restart-nappia, ettei tarvitse käynnistää koko peliä uudestaan. Parhaat pisteet (sillä käynnistyskerralla) näkee myös alakulmasta.
+
+10.4.2014
+
+Korjasin pari hämärää bugia. Tähän menikin muutama tunti. Sitten tein pari sekvenssikaavioita lisää, kirjoittelin todella paljon testejä ja jatkoin javaDocia kattavammaksi.
