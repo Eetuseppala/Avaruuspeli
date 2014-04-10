@@ -115,4 +115,10 @@ public class TahtitaivasTest {
 
         assertEquals(tahti.y, entinenY + 1);
     }
+    
+    @Test
+    public void tahtiaOikeaMaara() {
+        Tahtitaivas tahtitaivas = new Tahtitaivas();
+        assertEquals(tahtitaivas.tahdet.size(), 15);
+    }
 }

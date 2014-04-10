@@ -39,8 +39,6 @@ public class Kayttoliittyma extends JFrame {
             korkeus = 600;
     Dimension ruudunKoko = new Dimension(leveys, korkeus);
 
-    private Kuuntelija kuuntelija = new Kuuntelija();
-
     Thread avaruusalus = new Thread(alus);
 
     Thread liikkuvatTahdet = new Thread(tahdet);
@@ -91,16 +89,16 @@ public class Kayttoliittyma extends JFrame {
                 g.setColor(Color.RED);
                 g.drawString("KUOLIT!", 230, 290);
 
-                g.setColor(Color.DARK_GRAY);
+                g.setColor(Color.GREEN);
                 g.fillRect(startNappi.x, startNappi.y, startNappi.width, startNappi.height);
-                g.setColor(Color.WHITE);
+                g.setColor(Color.BLACK);
                 g.drawString("RESTART", 225, 325);
             }
         } else {
-            g.setColor(Color.DARK_GRAY);
+            g.setColor(Color.GREEN);
             g.drawString("Onnea matkaan!", 210, 200);
             g.fillRect(startNappi.x, startNappi.y, startNappi.width, startNappi.height);
-            g.setColor(Color.WHITE);
+            g.setColor(Color.BLACK);
             g.drawString("START", 240, 325);
         }
 

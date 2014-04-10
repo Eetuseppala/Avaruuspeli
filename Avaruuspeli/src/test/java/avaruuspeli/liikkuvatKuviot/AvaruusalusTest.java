@@ -108,11 +108,126 @@ public class AvaruusalusTest {
         Asteroidikentta asteroidikentta = new Asteroidikentta();
         Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
         Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta, vihollislaivue);
-        
+
         alus.ammukset.add(new Rectangle(300, 300, 3, 5));
-        
+
         alus.liikutaAmmuksia();
-        
-        assertEquals(alus.getAmmuksenY(0), 298);
+
+        assertEquals(alus.ammukset.get(0).y, 298);
+    }
+
+    @Test
+    public void nakyvistaHavinneitaAmmuksiaEiEnaaPiirreta() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
+        Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta, vihollislaivue);
+
+        alus.ammukset.add(new Rectangle(300, -25, 3, 5));
+
+        alus.poistaNakyvistaHavinneetAmmukset();
+
+        assertEquals(alus.ammukset.get(0).height, 0);
+        assertEquals(alus.ammukset.get(0).width, 0);
+    }
+
+    @Test
+    public void kunTuhotaanAsteroidiNiinSaadaan10pistetta() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
+        Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta, vihollislaivue);
+
+        asteroidikentta.asteroidit.add(new Rectangle(250, 250, 30, 30));
+
+        alus.ammukset.add(new Rectangle(250, 250, 3, 5));
+
+        alus.osumaAsteroidiin();
+
+        assertEquals(alus.getPisteet(), 10);
+    }
+
+    @Test
+    public void kunAmmusOsuuAsteroidiinNiinSeHaviaa() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
+        Avaruusalus alus = new Avaruusalus(250, 300, asteroidikentta, vihollislaivue);
+
+        asteroidikentta.asteroidit.add(new Rectangle(250, 250, 30, 30));
+
+        alus.ammukset.add(new Rectangle(250, 250, 3, 5));
+
+        alus.osumaAsteroidiin();
+
+        assertEquals(alus.ammukset.get(0).height, 0);
+        assertEquals(alus.ammukset.get(0).width, 0);
+    }
+
+    @Test
+    public void pelaajaKuoleeAsteroidiinTormayksesta() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
+        Avaruusalus alus = new Avaruusalus(250, 250, asteroidikentta, vihollislaivue);
+
+        asteroidikentta.asteroidit.add(new Rectangle(250, 250, 30, 30));
+
+        alus.osumaAsteroidiin();
+
+        assertEquals(alus.pelaajaKuollut, true);
+        assertEquals(alus.alus.height, 0);
+        assertEquals(alus.alus.width, 0);
+    }
+
+    @Test
+    public void kunTuhotaanVihollinenNiinSaadaan30pistetta() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
+        Avaruusalus alus = new Avaruusalus(250, 250, asteroidikentta, vihollislaivue);
+
+        vihollislaivue.viholliset.add(new Rectangle(250, 300, 30, 30));
+
+        alus.ammukset.add(new Rectangle(250, 300, 3, 5));
+
+        alus.osumaViholliseen();
+
+        assertEquals(alus.getPisteet(), 30);
+    }
+
+    @Test
+    public void kunAmmusOsuuViholliseenNiinSeHaviaa() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
+        Avaruusalus alus = new Avaruusalus(250, 250, asteroidikentta, vihollislaivue);
+
+        vihollislaivue.viholliset.add(new Rectangle(250, 300, 30, 30));
+
+        alus.ammukset.add(new Rectangle(250, 300, 3, 5));
+
+        alus.osumaViholliseen();
+
+        assertEquals(alus.ammukset.get(0).height, 0);
+        assertEquals(alus.ammukset.get(0).width, 0);
+    }
+
+    @Test
+    public void pelaajaKuoleeViholliseenTormayksesta() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
+        Avaruusalus alus = new Avaruusalus(250, 250, asteroidikentta, vihollislaivue);
+
+        vihollislaivue.viholliset.add(new Rectangle(250, 250, 30, 30));
+
+        alus.osumaViholliseen();
+
+        assertEquals(alus.pelaajaKuollut, true);
+        assertEquals(alus.alus.height, 0);
+        assertEquals(alus.alus.width, 0);
+    }
+    
+    @Test
+    public void pelaajaKuoleeVihollisenAmmukseen() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
+        Avaruusalus alus = new Avaruusalus(250, 250, asteroidikentta, vihollislaivue);
+
+        vihollislaivue.viholliset.add(new Rectangle(250, 250, 30, 30));
     }
 }

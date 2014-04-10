@@ -21,6 +21,7 @@ public class Vihollislaivue implements Runnable {
     int ySuunta = 1;
     int pisteet = 0;
     public int viivemittari = 0;
+    public boolean vihollisenAmmusKasittelyssa = false; //Estämään concurrentModificationExceptionit.
     Avaruusalus alus;
     Asteroidikentta asteroidit;
 
@@ -31,7 +32,7 @@ public class Vihollislaivue implements Runnable {
             this.y = yArvonArpominen();
             Rectangle vihollinen = new Rectangle(x, y, 10, 20);
             viholliset.add(vihollinen);
-            eiPaallekkaisiaVihollisia();
+//            eiPaallekkaisiaVihollisia();
         }
         this.alus = alus;
         this.asteroidit = asteroidit;
@@ -50,7 +51,7 @@ public class Vihollislaivue implements Runnable {
     }
 
     public void piirra(Graphics g) {
-        g.setColor(Color.MAGENTA);
+        g.setColor(Color.GREEN);
 
         for (Rectangle vihollinen : viholliset) {
             g.fillRect(vihollinen.x, vihollinen.y, vihollinen.width, vihollinen.height);
@@ -70,18 +71,21 @@ public class Vihollislaivue implements Runnable {
 
     public void ammu() {
 
+        vihollisenAmmusKasittelyssa = true;
+
         if (viivemittari <= 0) {
             for (Rectangle vihollinen : viholliset) {
 
-                if (vihollinen.height == 20) {   //Testataan käytännössä onko alus tuhoutunut vai ei: tuhoutuneella 0
+                if (vihollinen.height == 20) {   //onko vihollinen elossa, jos 0 niin ei ole eikä silloin ammuta
                     ammusX = vihollinen.x + 4;
                     ammusY = vihollinen.y + 16;
-                    
+
                     ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
                 }
             }
             viivemittari = 100;
         }
+        vihollisenAmmusKasittelyssa = false;
     }
 
     public void liikutaAmmuksia() {
@@ -96,7 +100,7 @@ public class Vihollislaivue implements Runnable {
 
     public void tuhoudu(Rectangle vihollinen) {
         vihollinen.height = 0;
-        vihollinen.height = 0;
+        vihollinen.width = 0;
     }
 
     public void osumaAsteroidiin() {
@@ -129,23 +133,22 @@ public class Vihollislaivue implements Runnable {
         return pisteet;
     }
 
-    private void eiPaallekkaisiaVihollisia() {
-        for (int i = 0; i < viholliset.size(); i++) {
-
-            Rectangle verrattava = viholliset.get(i);
-
-            if (viholliset.size() > 1) {
-
-                for (Rectangle vihollinen : viholliset) {
-                    if (verrattava.intersects(vihollinen))  {
-                        vihollinen.x -= 7;
-                        vihollinen.y -= 7;
-                    }
-                }
-            }
-        }
-    }
-    
+//    private void eiPaallekkaisiaVihollisia() {
+//        for (int i = 0; i < viholliset.size(); i++) {
+//
+//            Rectangle verrattava = viholliset.get(i);
+//
+//            if (viholliset.size() > 1) {
+//
+//                for (Rectangle vihollinen : viholliset) {
+//                    if (verrattava.intersects(vihollinen)) {
+//                        vihollinen.x -= 7;
+//                        vihollinen.y -= 7;
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     @Override
     public void run() {

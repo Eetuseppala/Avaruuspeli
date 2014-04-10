@@ -104,14 +104,76 @@ public class VihollislaivueTest {
         Asteroidikentta asteroidit = new Asteroidikentta();
         Vihollislaivue viholliset = new Vihollislaivue(asteroidit);
 
-        Rectangle asteroidi = new Rectangle(200, 200, 15, 10);
+        Rectangle vihollinen = new Rectangle(200, 200, 15, 10);
 
-        viholliset.viholliset.add(asteroidi);
+        viholliset.viholliset.add(vihollinen);
 
-        int entinenY = asteroidi.y;
+        int entinenY = vihollinen.y;
 
         viholliset.liiku();
 
-        assertEquals(asteroidi.y, entinenY + 1);
+        assertEquals(vihollinen.y, entinenY + 1);
+    }
+    
+    @Test
+    public void vihollisAluksiaOikeaMaara() {
+        Asteroidikentta asteroidit = new Asteroidikentta();
+        Vihollislaivue viholliset = new Vihollislaivue(asteroidit);
+        
+        assertEquals(viholliset.viholliset.size(), 8);
+    }
+    
+    @Test
+    public void ampuminenToimii() {
+        Asteroidikentta asteroidit = new Asteroidikentta();
+        Vihollislaivue viholliset = new Vihollislaivue(asteroidit);
+        
+        viholliset.ammu();
+        
+        assertEquals(viholliset.ammukset.size(), 8);
+    }
+    
+    @Test
+    public void ammuksetLiikkuu() {
+        Asteroidikentta asteroidit = new Asteroidikentta();
+        Vihollislaivue viholliset = new Vihollislaivue(asteroidit);
+        
+        viholliset.ammukset.add(new Rectangle(300, 300, 3, 5));
+        
+        viholliset.liikutaAmmuksia();
+        
+        assertEquals(viholliset.ammukset.get(0).y, 305);
+    }
+    
+    @Test
+    public void tuhoutuminenToimii() {
+        Asteroidikentta asteroidit = new Asteroidikentta();
+        Vihollislaivue viholliset = new Vihollislaivue(asteroidit);
+        
+        Rectangle vihollinen = new Rectangle(200, 200, 15, 10);
+
+        viholliset.viholliset.add(vihollinen);
+        
+        viholliset.tuhoudu(vihollinen);
+        
+        assertEquals(vihollinen.height, 0);
+        assertEquals(vihollinen.width, 0);
+    }
+    
+    @Test
+    public void vihollinenTuhoutuuKunSeOsuuAsteroidiin() {
+        Asteroidikentta asteroidit = new Asteroidikentta();
+        Vihollislaivue viholliset = new Vihollislaivue(asteroidit);
+        
+        Rectangle vihollinen = new Rectangle(250, 250, 15, 10);
+        
+        viholliset.viholliset.add(vihollinen);
+        
+        asteroidit.asteroidit.add(new Rectangle(250, 250, 30, 30));
+        
+        viholliset.osumaAsteroidiin();
+        
+        assertEquals(vihollinen.height, 0);
+        assertEquals(vihollinen.width, 0);
     }
 }

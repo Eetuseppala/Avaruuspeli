@@ -23,7 +23,7 @@ public class Avaruusalus implements Runnable {
     public int pisteet = 0;
     public int parasTulos = 0;
     public boolean pelaajaKuollut = false;
-    public int aikaaEdellisestaAmmuksesta = 0;
+    public int ammustenAikarajoitin = 0;
     ArrayList<Rectangle> ammukset = new ArrayList();
 
     /* 
@@ -69,12 +69,12 @@ public class Avaruusalus implements Runnable {
 
         if (e.getKeyCode() == e.VK_SPACE) {
 
-            if (!pelaajaKuollut && aikaaEdellisestaAmmuksesta <= 0) {
+            if (!pelaajaKuollut && ammustenAikarajoitin <= 0) {
                 ammusX = alus.x + 4;
                 ammusY = alus.y - 4;
 
                 ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
-                aikaaEdellisestaAmmuksesta = 100;
+                ammustenAikarajoitin = 10;
             }
         }
     }
@@ -97,21 +97,6 @@ public class Avaruusalus implements Runnable {
         }
         if (e.getKeyCode() == e.VK_RIGHT) {
             setXSuunta(0);
-        }
-
-        if (e.getKeyCode() == e.VK_SPACE) {
-            Rectangle poistettavaAmmus = null;
-            boolean poistetaan = false;
-
-            for (Rectangle ammus : ammukset) {
-                if (ammus.y <= -20) {
-                    poistettavaAmmus = ammus;
-                    poistetaan = true;
-                }
-            }
-            if (poistetaan) {
-                ammukset.remove(poistettavaAmmus);
-            }
         }
     }
 
@@ -165,8 +150,14 @@ public class Avaruusalus implements Runnable {
         }
     }
 
-    public int getAmmuksenY(int i) {
-        return ammukset.get(i).y;
+    public void poistaNakyvistaHavinneetAmmukset() {
+
+        for (Rectangle ammus : ammukset) {
+            if (ammus.y <= -20) {
+                ammus.height = 0;
+                ammus.width = 0;
+            }
+        }
     }
 
     public void osumaAsteroidiin() {
@@ -218,16 +209,19 @@ public class Avaruusalus implements Runnable {
             }
         }
     }
-    
+
     public void osumaVihollisenAmmukseen() {
-        
-        Iterator<Rectangle> iteraattori = viholliset.ammukset.iterator(); //Herjasi exceptioneita niin piti tehdä näin
-        
-        while(iteraattori.hasNext()) {
-            if(iteraattori.next().intersects(alus)) {
-                alus.height = 0;
-                alus.width = 0;
-                pelaajaKuollut = true;
+
+        if (!viholliset.vihollisenAmmusKasittelyssa) {  //estetään concurrentModificationException
+
+            Iterator<Rectangle> iteraattori = viholliset.ammukset.iterator();
+
+            while (iteraattori.hasNext()) {
+                if (iteraattori.next().intersects(alus)) {
+                    alus.height = 0;
+                    alus.width = 0;
+                    pelaajaKuollut = true;
+                }
             }
         }
     }
@@ -235,24 +229,24 @@ public class Avaruusalus implements Runnable {
     public int getPisteet() {
         return this.pisteet;
     }
-    
+
     public void nollaaPisteet() {
         this.pisteet = 0;
     }
-    
+
     public void heraaHenkiin() {
         alus.height = 20;
         alus.width = 10;
         alus.x = 250;
-        alus.y = 300;              
+        alus.y = 300;
     }
 
     public void piirra(Graphics g) {
-        g.setColor(Color.BLUE);
+        g.setColor(Color.WHITE);
         g.fillRect(alus.x, alus.y, alus.width, alus.height);
 
         for (Rectangle ammus : ammukset) {
-            g.setColor(Color.GREEN);
+            g.setColor(Color.CYAN);
             g.fillRect(ammus.x, ammus.y, ammus.width, ammus.height);
         }
     }
@@ -261,9 +255,10 @@ public class Avaruusalus implements Runnable {
     public void run() {
         try {
             while (true) {
-                aikaaEdellisestaAmmuksesta--;
+                ammustenAikarajoitin--;
                 liiku();
                 liikutaAmmuksia();
+                poistaNakyvistaHavinneetAmmukset();
                 osumaAsteroidiin();
                 osumaViholliseen();
                 osumaVihollisenAmmukseen();

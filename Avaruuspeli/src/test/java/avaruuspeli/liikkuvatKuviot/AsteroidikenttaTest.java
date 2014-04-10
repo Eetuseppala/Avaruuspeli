@@ -111,5 +111,18 @@ public class AsteroidikenttaTest {
         
         assertEquals(asteroidi.y, entinenY + 1);
     }
-
+    
+    @Test
+    public void tuhoutuminenToimii() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        
+        Rectangle asteroidi = new Rectangle(200, 200, 15, 10);
+        
+        asteroidikentta.asteroidit.add(asteroidi);
+        
+        asteroidikentta.tuhoudu(asteroidi);
+        
+        assertEquals(asteroidi.width, 0);
+        assertEquals(asteroidi.height, 0);
+    }
 }
