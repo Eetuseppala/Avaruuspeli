@@ -178,9 +178,7 @@ public class Avaruusalus implements Runnable {
         for (Rectangle asteroidi : asteroidit.getAsteroidit()) {
 
             if (asteroidi.intersects(alus)) {
-                alus.height = 0;
-                alus.width = 0;
-                pelaajaKuollut = true;
+                kuole();
             }
         }
     }
@@ -203,9 +201,7 @@ public class Avaruusalus implements Runnable {
         for (Rectangle vihollinen : viholliset.getViholliset()) {
 
             if (vihollinen.intersects(alus)) {
-                alus.height = 0;
-                alus.width = 0;
-                pelaajaKuollut = true;
+                kuole();
             }
         }
     }
@@ -218,9 +214,7 @@ public class Avaruusalus implements Runnable {
 
             while (iteraattori.hasNext()) {
                 if (iteraattori.next().intersects(alus)) {
-                    alus.height = 0;
-                    alus.width = 0;
-                    pelaajaKuollut = true;
+                    kuole();
                 }
             }
         }
@@ -239,6 +233,12 @@ public class Avaruusalus implements Runnable {
         alus.width = 10;
         alus.x = 250;
         alus.y = 300;
+    }
+
+    public void kuole() {
+        alus.height = 0;
+        alus.width = 0;
+        pelaajaKuollut = true;
     }
 
     public void piirra(Graphics g) {

@@ -228,6 +228,39 @@ public class AvaruusalusTest {
         Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
         Avaruusalus alus = new Avaruusalus(250, 250, asteroidikentta, vihollislaivue);
 
-        vihollislaivue.viholliset.add(new Rectangle(250, 250, 30, 30));
+        Rectangle vihollinen = new Rectangle(250, 247, 10, 20);
+        vihollislaivue.viholliset.add(vihollinen);
+        
+        vihollislaivue.ammu();
+        
+        alus.osumaVihollisenAmmukseen();
+        
+        assertEquals(alus.pelaajaKuollut, true);
+        assertEquals(alus.alus.height, 0);
+        assertEquals(alus.alus.width, 0);
+    }
+    
+    @Test
+    public void alusHeraaHenkiin() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
+        Avaruusalus alus = new Avaruusalus(250, 250, asteroidikentta, vihollislaivue);
+        
+        alus.kuole();
+        alus.heraaHenkiin();
+
+        assertEquals(alus.alus.height, 20);
+        assertEquals(alus.alus.width, 10);
+    }
+    
+    @Test
+    public void kuolemismetodiToimii() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
+        Avaruusalus alus = new Avaruusalus(250, 250, asteroidikentta, vihollislaivue);
+        
+        alus.kuole();
+        
+        assertEquals(alus.pelaajaKuollut, true);
     }
 }

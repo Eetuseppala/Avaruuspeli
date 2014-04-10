@@ -70,7 +70,7 @@ public class AsteroidikenttaTest {
 
         boolean kelvollinen = false;
 
-        if (asteroidi.x > 0 && asteroidi.x < 500) {
+        if (asteroidi.x > 0 && asteroidi.x <= 500) {
             kelvollinen = true;
         }
 
@@ -83,7 +83,7 @@ public class AsteroidikenttaTest {
 
         boolean kelvollinen = false;
 
-        if (asteroidi.y > 0 && asteroidi.y < 600) {
+        if (asteroidi.y > 0 && asteroidi.y <= 600) {
             kelvollinen = true;
         }
 
