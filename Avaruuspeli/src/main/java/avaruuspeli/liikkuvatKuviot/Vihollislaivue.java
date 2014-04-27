@@ -7,12 +7,9 @@ package avaruuspeli.liikkuvatKuviot;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.Random;
 
-public class Vihollislaivue implements Runnable {
+public class Vihollislaivue extends AlasPainLiikkuva implements Runnable {
 
     int x, y;
     int ammusX, ammusY;
@@ -41,26 +38,6 @@ public class Vihollislaivue implements Runnable {
             osumaToiseenViholliseen();
         }
         this.asteroidit = asteroidit;
-    }
-
-    /*
-     * Yksittäiselle Rectangle-tyyppiselle viholliselle määritellään satunnainen x-koordinaatti
-     * peli-ikkunan puitteissa.
-     */
-    public int xArvonArpominen() {
-        Random r = new Random();
-        int arpa = r.nextInt(500);
-        return arpa;
-    }
-
-    /*
-     * Yksittäiselle Rectangle-tyyppiselle viholliselle määritellään satunnainen y-koordinaatti
-     * peli-ikkunan puitteissa.
-     */
-    public int yArvonArpominen() {
-        Random r = new Random();
-        int arpa = r.nextInt(600);
-        return arpa;
     }
 
     /*
@@ -128,14 +105,6 @@ public class Vihollislaivue implements Runnable {
     }
 
     /*
-     * Tätä metodia kutsutaan, kun tietyn vihollisen täytyy tuhoutua.
-     */
-    public void tuhoudu(Rectangle vihollinen) {
-        vihollinen.height = 0;
-        vihollinen.width = 0;
-    }
-
-    /*
      * Tässä metodissa tarkistetaan osuuko mikään vihollisten ammuksista mihinkään asteroidiin.
      * Jos näin on niin sellaiset asteroidit tuhoutuvat. Sen jälkeen katsotaan toisaalta osuuko
      * mikään asteroideista yhteenkään viholliseen. Tämän sattuessa ko. vihollinen tuhoutuu.
@@ -170,6 +139,10 @@ public class Vihollislaivue implements Runnable {
         return pisteet;
     }
 
+    /*
+     * Tässä metodissa tarkistetaan onko vihollisia päälekkäin eli toistensa sisällä.
+     * Tämä ei ole toivottavaa koska se ei näytä kivalta.
+     */
     public void osumaToiseenViholliseen() {
 
         for (int i = 0; i < viholliset.size(); i++) {

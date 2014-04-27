@@ -10,7 +10,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Tahtitaivas implements Runnable {
+public class Tahtitaivas extends AlasPainLiikkuva implements Runnable {
 
     int x, y, ySuunta;
 
@@ -29,26 +29,6 @@ public class Tahtitaivas implements Runnable {
             Rectangle tahti = new Rectangle(x, y, 1, 1);
             tahdet.add(tahti);
         }
-    }
-
-    /*
-     * Yksittäiselle Rectangle-tyyppiselle tähdelle määritellään satunnainen x-koordinaatti
-     * peli-ikkunan puitteissa.
-     */
-    public int xArvonArpominen() {
-        Random r = new Random();
-        int arpa = r.nextInt(500);
-        return arpa;
-    }
-
-    /*
-     * Yksittäiselle Rectangle-tyyppiselle tähdelle määritellään satunnainen y-koordinaatti
-     * peli-ikkunan puitteissa.
-     */
-    public int yArvonArpominen() {
-        Random r = new Random();
-        int arpa = r.nextInt(600);
-        return arpa;
     }
 
     public void piirra(Graphics g) {

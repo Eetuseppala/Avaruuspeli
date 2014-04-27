@@ -7,12 +7,10 @@ package avaruuspeli.liikkuvatKuviot;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Asteroidikentta implements Runnable {
+public class Asteroidikentta extends AlasPainLiikkuva implements Runnable {
 
     int x, y, ySuunta;
 
@@ -33,26 +31,6 @@ public class Asteroidikentta implements Runnable {
         }
     }
 
-    /*
-     * Yksittäiselle Rectangle-tyyppiselle asteroidille määritellään satunnainen x-koordinaatti
-     * peli-ikkunan puitteissa.
-     */
-    public int xArvonArpominen() {
-        Random r = new Random();
-        int arpa = r.nextInt(500);
-        return arpa;
-    }
-
-    /*
-     * Yksittäiselle Rectangle-tyyppiselle asteroidille määritellään satunnainen y-koordinaatti
-     * peli-ikkunan puitteissa.
-     */
-    public int yArvonArpominen() {
-        Random r = new Random();
-        int arpa = r.nextInt(600);
-        return arpa;
-    }
-
     public void piirra(Graphics g) {
 
         for (Rectangle asteroidi : asteroidit) {
@@ -69,6 +47,10 @@ public class Asteroidikentta implements Runnable {
         for (Rectangle asteroidi : asteroidit) {
             asteroidi.y += ySuunta;
         }
+    }
+
+    public Iterable<Rectangle> getAsteroidit() {
+        return this.asteroidit;
     }
 
     @Override
@@ -90,14 +72,4 @@ public class Asteroidikentta implements Runnable {
             System.err.println(e.getMessage());
         }
     }
-
-    public Iterable<Rectangle> getAsteroidit() {
-        return this.asteroidit;
-    }
-
-    public void tuhoudu(Rectangle asteroidi) {
-        asteroidi.width = 0;
-        asteroidi.height = 0;
-    }
-
 }
