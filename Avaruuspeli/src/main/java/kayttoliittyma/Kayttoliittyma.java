@@ -5,7 +5,7 @@
 package kayttoliittyma;
 
 import avaruuspeli.liikkuvatKuviot.Asteroidikentta;
-import avaruuspeli.liikkuvatKuviot.Avaruusalus;
+import avaruuspeli.liikkuvatKuviot.Pelaaja;
 import avaruuspeli.liikkuvatKuviot.Tahtitaivas;
 import avaruuspeli.liikkuvatKuviot.Vihollislaivue;
 import java.awt.Color;
@@ -17,7 +17,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import javax.swing.JFrame;
 
 public class Kayttoliittyma extends JFrame {
@@ -33,7 +32,7 @@ public class Kayttoliittyma extends JFrame {
 
     public static Vihollislaivue viholliset = new Vihollislaivue(asteroidit);
 
-    public static Avaruusalus alus = new Avaruusalus(250, 300, asteroidit, viholliset); //Pelaajan liikuteltava alus
+    public static Pelaaja alus = new Pelaaja(250, 300, asteroidit, viholliset); //Pelaajan liikuteltava alus
 
     int leveys = 500,
             korkeus = 600;
@@ -108,7 +107,7 @@ public class Kayttoliittyma extends JFrame {
         repaint();
     }
 
-    public Avaruusalus getAlus() {
+    public Pelaaja getAlus() {
         return alus;
     }
 

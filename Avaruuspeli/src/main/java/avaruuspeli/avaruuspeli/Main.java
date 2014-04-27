@@ -1,6 +1,5 @@
 /* 
  * Ohjelman pääluokka, joka käynnistää käyttöliittymän, luo threadit ja käynnistää ne.
- * 
  */
 package avaruuspeli.avaruuspeli;
 

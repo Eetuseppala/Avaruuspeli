@@ -1,8 +1,7 @@
-/* 
+/*
  * Tämä on luokka, joka pitää sisällään kokoelman Rectangle-tyyppisiä tähtiä
  * ja niihin liittyviä metodeja
  */
-
 package avaruuspeli.liikkuvatKuviot;
 
 import java.awt.Color;
@@ -17,7 +16,7 @@ public class Tahtitaivas implements Runnable {
 
     ArrayList<Rectangle> tahdet = new ArrayList();
 
-     /* 
+    /*
      * Tässä konstruktorissa luodaan uusi Rectangle-tyyppisten tähtien joukko,
      * jota tämä peli kierrättää.
      */
@@ -32,7 +31,7 @@ public class Tahtitaivas implements Runnable {
         }
     }
 
-    /* 
+    /*
      * Yksittäiselle Rectangle-tyyppiselle tähdelle määritellään satunnainen x-koordinaatti
      * peli-ikkunan puitteissa.
      */
@@ -42,7 +41,7 @@ public class Tahtitaivas implements Runnable {
         return arpa;
     }
 
-    /* 
+    /*
      * Yksittäiselle Rectangle-tyyppiselle tähdelle määritellään satunnainen y-koordinaatti
      * peli-ikkunan puitteissa.
      */
@@ -60,7 +59,7 @@ public class Tahtitaivas implements Runnable {
         }
     }
 
-    /* 
+    /*
      * Muuttaa tähden suuntaa.
      */
     public void liiku() {

@@ -1,6 +1,6 @@
-/* 
+/*
  * Tässä luokassa on pelaajan ohjaama avaruusalus ja siihen liittyvät metodit
- * 
+ *
  */
 package avaruuspeli.liikkuvatKuviot;
 
@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Avaruusalus implements Runnable {
+public class Pelaaja implements Runnable {
 
     int x, y, ySuunta, xSuunta;
     int ammusX, ammusY;
@@ -26,19 +26,19 @@ public class Avaruusalus implements Runnable {
     public int ammustenAikarajoitin = 0;
     ArrayList<Rectangle> ammukset = new ArrayList();
 
-    /* 
+    /*
      * Avaruusalus-luokan konstruktorissa luodaan alusta kuvaava Rectangle-tyyppinen objekti
      * ja annetaan avaruusalukselle tieto asteroideista ja vihollisista, joita se tarvitsee
      *
-     * @param   x   avaruusaluksen sijainnin x-arvo
+     * @param x avaruusaluksen sijainnin x-arvo
      *
-     * @param   y   avaruusaluksen sijainnin y-arvo
+     * @param y avaruusaluksen sijainnin y-arvo
      *
-     * @param   asteroidikentta   avaruusalus tarvitsee tiedon pelin asteroideista
+     * @param asteroidikentta avaruusalus tarvitsee tiedon pelin asteroideista
      *
-     * @param   vihollislaivue   avaruusalus tarvitsee tiedon pelin vihollisista
+     * @param vihollislaivue avaruusalus tarvitsee tiedon pelin vihollisista
      */
-    public Avaruusalus(int x, int y, Asteroidikentta asteroidikentta, Vihollislaivue vihollislaivue) {
+    public Pelaaja(int x, int y, Asteroidikentta asteroidikentta, Vihollislaivue vihollislaivue) {
         this.x = x;
         this.y = y;
         alus = new Rectangle(x, y, 10, 20);
@@ -47,9 +47,9 @@ public class Avaruusalus implements Runnable {
     }
 
 
-    /* 
+    /*
      * Avaruusaluksen kontrollointiin (käyttäjän ohjaamana) osallistuva metodi
-     * 
+     *
      */
     public void keyPressed(KeyEvent e) {
 
@@ -74,14 +74,14 @@ public class Avaruusalus implements Runnable {
                 ammusY = alus.y - 4;
 
                 ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
-                ammustenAikarajoitin = 10;
+                ammustenAikarajoitin = 50;
             }
         }
     }
 
-    /* 
+    /*
      * Avaruusaluksen kontrollointiin (käyttäjän ohjaamana) osallistuva metodi
-     * 
+     *
      */
     public void keyReleased(KeyEvent e) {
 
@@ -100,19 +100,19 @@ public class Avaruusalus implements Runnable {
         }
     }
 
-    /* 
+    /*
      * Muuttaa avaruusaluksen suuntaa y-akselilla
-     * 
-     * @param   uusiSuunta   haluttu uusi suunta y-akselilla
+     *
+     * @param uusiSuunta haluttu uusi suunta y-akselilla
      */
     public void setYSuunta(int uusiSuunta) {
         ySuunta = uusiSuunta;
     }
 
-    /* 
+    /*
      * Muuttaa avaruusaluksen suuntaa x-akselilla
-     * 
-     * @param   uusiSuunta   haluttu uusi suunta x-akselilla
+     *
+     * @param uusiSuunta haluttu uusi suunta x-akselilla
      */
     public void setXSuunta(int uusiSuunta) {
         xSuunta = uusiSuunta;
@@ -125,8 +125,8 @@ public class Avaruusalus implements Runnable {
     public int getXSuunta() {
         return this.xSuunta;
     }
-    
-    /* 
+
+    /*
      * Muuttaa aluksen suunnan
      */
     public void liiku() {
@@ -147,7 +147,7 @@ public class Avaruusalus implements Runnable {
         }
     }
 
-    /* 
+    /*
      * Nimensä mukaisesti liikuttaa pelaajan ampumia ammuksia eteenpäin
      */
     public void liikutaAmmuksia() {
@@ -156,22 +156,20 @@ public class Avaruusalus implements Runnable {
         }
     }
 
-    
-    /* 
+    /*
      * Nimensä mukaisesti poistaa näkyvistä hävinneet ammukset
      */
     public void poistaNakyvistaHavinneetAmmukset() {
 
         for (Rectangle ammus : ammukset) {
-            if (ammus.y <= -20) {
+            if (ammus.y <= -200) {
                 ammus.height = 0;
                 ammus.width = 0;
             }
         }
     }
 
-    
-    /* 
+    /*
      * Testaa, osuuko mikään pelaajan ammuksista mihinkään asteroidiin.
      * Jos näin on niin ko. asteroidi tuhoutuu. Sen jälkeen katsotaan osuuko toisaalta
      * pelaaja yhteenkään asteroidiin. Jos näin on niin pelaaja kuolee.
@@ -182,7 +180,7 @@ public class Avaruusalus implements Runnable {
 
             for (Rectangle asteroidi : asteroidit.getAsteroidit()) {
 
-                if (ammukset.get(i).intersects(asteroidi)) {
+                if (asteroidi.intersects(ammukset.get(i))) {
                     asteroidit.tuhoudu(asteroidi);
                     pisteet += 10;
                     ammukset.get(i).height = 0;
@@ -199,8 +197,7 @@ public class Avaruusalus implements Runnable {
         }
     }
 
-    
-    /* 
+    /*
      * Testaa, osuuko mikään pelaajan ammuksista mihinkään viholliseen.
      * Jos näin on niin ko. vihollinen tuhoutuu. Sen jälkeen katsotaan osuuko toisaalta
      * pelaaja yhteenkään viholliseen. Jos näin on niin pelaaja kuolee.
@@ -211,7 +208,7 @@ public class Avaruusalus implements Runnable {
 
             for (Rectangle vihollinen : viholliset.getViholliset()) {
 
-                if (ammukset.get(i).intersects(vihollinen)) {
+                if (vihollinen.intersects(ammukset.get(i))) {
                     viholliset.tuhoudu(vihollinen);
                     pisteet += 30;
                     ammukset.get(i).height = 0;
@@ -228,13 +225,13 @@ public class Avaruusalus implements Runnable {
         }
     }
 
-    /* 
+    /*
      * Testaa, osuuko pelaaja yhteenkään vihollisten ammuksista.
      * Jos näin on niin pelaaja kuolee.
      */
     public void osumaVihollisenAmmukseen() {
 
-        if (!viholliset.vihollisenAmmusKasittelyssa) {  //estetään concurrentModificationException
+        if (!viholliset.vihollisenAmmusKasittelyssa) { //estetään concurrentModificationException
 
             Iterator<Rectangle> iteraattori = viholliset.ammukset.iterator();
 
@@ -254,7 +251,7 @@ public class Avaruusalus implements Runnable {
         this.pisteet = 0;
     }
 
-    /* 
+    /*
      * Kun pelaaja kuolee ja painaa sen jälkeen RESTART-nappia, niin tätä
      * metodia kutsutaan. Silloin pelaaja herää henkiin ja näkyy jälleen.
      */
@@ -264,8 +261,8 @@ public class Avaruusalus implements Runnable {
         alus.x = 250;
         alus.y = 300;
     }
-    
-    /* 
+
+    /*
      * Tätä metodia kutsutaan kun pelaaja kuolee.
      */
     public void kuole() {
@@ -274,8 +271,8 @@ public class Avaruusalus implements Runnable {
         pelaajaKuollut = true;
     }
 
-    /* 
-     * Säännöt pelaajan ja pelaajan ammusten piirtämiseen. Määrittää miltä pelaaja näyttää ja miltä 
+    /*
+     * Säännöt pelaajan ja pelaajan ammusten piirtämiseen. Määrittää miltä pelaaja näyttää ja miltä
      * pelaajan ammukset näyttävät.
      */
     public void piirra(Graphics g) {
@@ -303,7 +300,7 @@ public class Avaruusalus implements Runnable {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            Logger.getLogger(Avaruusalus.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Pelaaja.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 

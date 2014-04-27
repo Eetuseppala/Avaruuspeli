@@ -1,6 +1,6 @@
-/* 
+/*
  * Tämä luokka pitää sisällään joukon Rectangle-tyyppisiä vihollisia
- * ja metodeja niihin liittyen 
+ * ja metodeja niihin liittyen
  */
 package avaruuspeli.liikkuvatKuviot;
 
@@ -24,12 +24,12 @@ public class Vihollislaivue implements Runnable {
     public boolean vihollisenAmmusKasittelyssa = false; //Estämään concurrentModificationExceptionit.
     Asteroidikentta asteroidit;
 
-    /* 
+    /*
      * Vihollislaivue-luokan konstruktorissa määritellään uusi Rectangle-tyyppisten
      * vihollisten joukko. Näitä vihollisia peli "kierrättää".
      *
-     * @param   asteroidit  Vihollislaivue tarvitsee tiedon asteroideista, jotta voisi
-     *                      tuhota niitä ja tuhoutua niihin.
+     * @param asteroidit Vihollislaivue tarvitsee tiedon asteroideista, jotta voisi
+     * tuhota niitä ja tuhoutua niihin.
      */
     public Vihollislaivue(Asteroidikentta asteroidit) {
 
@@ -38,12 +38,12 @@ public class Vihollislaivue implements Runnable {
             this.y = yArvonArpominen();
             Rectangle vihollinen = new Rectangle(x, y, 10, 20);
             viholliset.add(vihollinen);
-//            eiPaallekkaisiaVihollisia();
+            osumaToiseenViholliseen();
         }
         this.asteroidit = asteroidit;
     }
 
-    /* 
+    /*
      * Yksittäiselle Rectangle-tyyppiselle viholliselle määritellään satunnainen x-koordinaatti
      * peli-ikkunan puitteissa.
      */
@@ -53,7 +53,7 @@ public class Vihollislaivue implements Runnable {
         return arpa;
     }
 
-    /* 
+    /*
      * Yksittäiselle Rectangle-tyyppiselle viholliselle määritellään satunnainen y-koordinaatti
      * peli-ikkunan puitteissa.
      */
@@ -63,7 +63,7 @@ public class Vihollislaivue implements Runnable {
         return arpa;
     }
 
-    /* 
+    /*
      * Tämä metodi määrää, minkä näköisiksi viholliset ja niiden
      * ammukset piirretään.
      */
@@ -80,7 +80,7 @@ public class Vihollislaivue implements Runnable {
         }
     }
 
-    /* 
+    /*
      * Tämä metodi liikuttaa vihollisia ySuunta-nimisen oliomuuttujan mukaan.
      * Tässä pelissä sen arvo on aina 1 (alaspäin).
      */
@@ -90,7 +90,7 @@ public class Vihollislaivue implements Runnable {
         }
     }
 
-    /* 
+    /*
      * Tämä metodi saa viholliset ampumaan yhtä aikaa (toteutuksellinen valintani).
      * Viivemittari määrittää ampumistiheyden.
      */
@@ -101,7 +101,7 @@ public class Vihollislaivue implements Runnable {
         if (viivemittari <= 0) {
             for (Rectangle vihollinen : viholliset) {
 
-                if (vihollinen.height == 20) {   //onko vihollinen elossa, jos 0 niin ei ole eikä silloin ammuta
+                if (vihollinen.height == 20) { //onko vihollinen elossa, jos 0 niin ei ole eikä silloin ammuta
                     ammusX = vihollinen.x + 4;
                     ammusY = vihollinen.y + 16;
 
@@ -113,7 +113,7 @@ public class Vihollislaivue implements Runnable {
         vihollisenAmmusKasittelyssa = false;
     }
 
-    /* 
+    /*
      * Tämä metodi liikuttaa vihollisten ammuksia.
      * ammus.y:n muokkaaminen vaikuttaa vihollisten ammusten nopeuteen.
      */
@@ -127,7 +127,7 @@ public class Vihollislaivue implements Runnable {
         return this.viholliset;
     }
 
-    /* 
+    /*
      * Tätä metodia kutsutaan, kun tietyn vihollisen täytyy tuhoutua.
      */
     public void tuhoudu(Rectangle vihollinen) {
@@ -135,7 +135,7 @@ public class Vihollislaivue implements Runnable {
         vihollinen.width = 0;
     }
 
-    /* 
+    /*
      * Tässä metodissa tarkistetaan osuuko mikään vihollisten ammuksista mihinkään asteroidiin.
      * Jos näin on niin sellaiset asteroidit tuhoutuvat. Sen jälkeen katsotaan toisaalta osuuko
      * mikään asteroideista yhteenkään viholliseen. Tämän sattuessa ko. vihollinen tuhoutuu.
@@ -170,22 +170,21 @@ public class Vihollislaivue implements Runnable {
         return pisteet;
     }
 
-//    private void eiPaallekkaisiaVihollisia() {
-//        for (int i = 0; i < viholliset.size(); i++) {
-//
-//            Rectangle verrattava = viholliset.get(i);
-//
-//            if (viholliset.size() > 1) {
-//
-//                for (Rectangle vihollinen : viholliset) {
-//                    if (verrattava.intersects(vihollinen)) {
-//                        vihollinen.x -= 7;
-//                        vihollinen.y -= 7;
-//                    }
-//                }
-//            }
-//        }
-//    }
+    public void osumaToiseenViholliseen() {
+
+        for (int i = 0; i < viholliset.size(); i++) {
+
+            for (Rectangle vihollinen : viholliset) {
+
+                if (!(viholliset.get(i) == vihollinen)) {
+                    if (vihollinen.intersects(viholliset.get(i))) {
+                        vihollinen.y = -20;
+                        vihollinen.x = xArvonArpominen();
+                    }
+                }
+            }
+        }
+    }
 
     @Override
     public void run() {
@@ -203,6 +202,7 @@ public class Vihollislaivue implements Runnable {
                 ammu();
                 liikutaAmmuksia();
                 osumaAsteroidiin();
+                osumaToiseenViholliseen();
                 viivemittari--;
                 Thread.sleep(10);
             }

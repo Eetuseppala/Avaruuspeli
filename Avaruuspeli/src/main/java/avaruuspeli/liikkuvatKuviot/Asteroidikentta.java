@@ -1,4 +1,4 @@
-/* 
+/*
  * Tämä on luokka, joka pitää sisällään kokoelman Rectangle-tyyppisiä asteroideja
  * ja niihin liittyviä metodeja
  */
@@ -18,7 +18,7 @@ public class Asteroidikentta implements Runnable {
 
     ArrayList<Rectangle> asteroidit = new ArrayList();
 
-    /* 
+    /*
      * Tässä konstruktorissa luodaan uusi Rectangle-tyyppisten asteroidien joukko,
      * jota tämä peli kierrättää.
      */
@@ -32,8 +32,8 @@ public class Asteroidikentta implements Runnable {
             asteroidit.add(asteroidi);
         }
     }
-    
-    /* 
+
+    /*
      * Yksittäiselle Rectangle-tyyppiselle asteroidille määritellään satunnainen x-koordinaatti
      * peli-ikkunan puitteissa.
      */
@@ -43,7 +43,7 @@ public class Asteroidikentta implements Runnable {
         return arpa;
     }
 
-    /* 
+    /*
      * Yksittäiselle Rectangle-tyyppiselle asteroidille määritellään satunnainen y-koordinaatti
      * peli-ikkunan puitteissa.
      */
@@ -62,7 +62,7 @@ public class Asteroidikentta implements Runnable {
         }
     }
 
-    /* 
+    /*
      * Muuttaa asteroidin suuntaa.
      */
     public void liiku() {
