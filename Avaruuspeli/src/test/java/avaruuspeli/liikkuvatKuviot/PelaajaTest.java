@@ -1,5 +1,8 @@
 package avaruuspeli.liikkuvatKuviot;
 
+import avaruuspeli.liikkuvatKuviot.Asteroidikentta;
+import avaruuspeli.liikkuvatKuviot.Vihollislaivue;
+import avaruuspeli.liikkuvatKuviot.Pelaaja;
 import java.awt.Rectangle;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -112,19 +115,19 @@ public class PelaajaTest {
         assertEquals(alus.ammukset.get(0).y, 298);
     }
 
-//    @Test
-//    public void nakyvistaHavinneitaAmmuksiaEiEnaaPiirreta() {
-//        Asteroidikentta asteroidikentta = new Asteroidikentta();
-//        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
-//        Pelaaja alus = new Pelaaja(250, 300, asteroidikentta, vihollislaivue);
-//
-//        alus.ammukset.add(new Rectangle(300, -201, 3, 5));
-//
-//        alus.poistaNakyvistaHavinneetAmmukset();
-//
-//        assertEquals(alus.ammukset.get(0).height, 0);
-//        assertEquals(alus.ammukset.get(0).width, 0);
-//    }
+    @Test
+    public void nakyvistaHavinneitaAmmuksiaEiEnaaPiirreta() {
+        Asteroidikentta asteroidikentta = new Asteroidikentta();
+        Vihollislaivue vihollislaivue = new Vihollislaivue(asteroidikentta);
+        Pelaaja alus = new Pelaaja(250, 300, asteroidikentta, vihollislaivue);
+
+        alus.ammukset.add(new Rectangle(300, -201, 3, 5));
+
+        alus.poistaNakyvistaHavinneetAmmukset();
+
+        assertEquals(alus.ammukset.get(0).height, 0);
+        assertEquals(alus.ammukset.get(0).width, 0);
+    }
 
     @Test
     public void kunTuhotaanAsteroidiNiinSaadaan10pistetta() {

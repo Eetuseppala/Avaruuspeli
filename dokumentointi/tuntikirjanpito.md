@@ -35,3 +35,15 @@ Ohjelmoin muutamia tunteja ja sain viholliset toimimaan peliss‰. T‰m‰n lis‰ksi t
 10.4.2014
 
 Korjasin pari h‰m‰r‰‰ bugia. T‰h‰n menikin muutama tunti. Sitten tein pari sekvenssikaavioita lis‰‰, kirjoittelin todella paljon testej‰ ja jatkoin javaDocia kattavammaksi.
+
+26.4.2014
+
+Refaktoroin v‰h‰n koodia ja lis‰sin keinon, ettei p‰‰lekk‰isi‰ vihollisia en‰‰ tule. Samalla lis‰sin luokan "AlasPainLiikkuva", jonka t‰htitaivas, vihollislaivue ja asteroidikentt‰ periv‰t, koska niill‰ kaikilla on niin paljon samoja metodeja. Kohtasin h‰m‰ri‰ bugeja ja koitin niit‰ korjailla. Aikaa k‰ytetty noin 7 tuntia.
+
+27.4.2014
+
+Kulutin noin 4 tuntia bugien liiskaamiseen ja testasin ohjelmaa eri tavoilla. Nyt se tuntuisi toimivan ilman ongelmia.
+
+28.4.2014
+
+Yritin generoida javadocia mutta se ei onnistunut. NetBeans ei antanut tehd‰ sit‰ (nappi ei painettavissa) ja vaihtoehtoiset ohjeet kurssisivulla eiv‰t toimineet (k‰yt‰n Windows 8).

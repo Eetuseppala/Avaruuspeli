@@ -1,7 +1,4 @@
-/*
- * Tämä luokka pitää sisällään joukon Rectangle-tyyppisiä vihollisia
- * ja metodeja niihin liittyen
- */
+
 package avaruuspeli.liikkuvatKuviot;
 
 import java.awt.Color;
@@ -9,6 +6,10 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+/*
+ * Tämä luokka pitää sisällään joukon Rectangle-tyyppisiä vihollisia
+ * ja metodeja niihin liittyen
+ */
 public class Vihollislaivue extends AlasPainLiikkuva implements Runnable {
 
     int x, y;

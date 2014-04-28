@@ -1,15 +1,15 @@
-/*
- * Tämä on luokka, joka pitää sisällään kokoelman Rectangle-tyyppisiä tähtiä
- * ja niihin liittyviä metodeja
- */
+
 package avaruuspeli.liikkuvatKuviot;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Random;
 
+/*
+ * Tämä on luokka, joka pitää sisällään kokoelman Rectangle-tyyppisiä tähtiä
+ * ja niihin liittyviä metodeja
+ */
 public class Tahtitaivas extends AlasPainLiikkuva implements Runnable {
 
     int x, y, ySuunta;

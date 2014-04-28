@@ -1,7 +1,4 @@
-/* 
- * Tämä on Main-metodin käynnistämä käyttöliittymä pelille.
- * 
- */
+
 package kayttoliittyma;
 
 import avaruuspeli.liikkuvatKuviot.Asteroidikentta;
@@ -19,6 +16,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 
+/* 
+ * Tämä on Main-metodin käynnistämä käyttöliittymä pelille.
+ */
 public class Kayttoliittyma extends JFrame {
 
     Image kuva;

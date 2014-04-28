@@ -1,7 +1,4 @@
-/*
- * Tässä luokassa on pelaajan ohjaama avaruusalus ja siihen liittyvät metodit
- *
- */
+
 package avaruuspeli.liikkuvatKuviot;
 
 import java.awt.Color;
@@ -13,6 +10,9 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/*
+ * Tässä luokassa on pelaajan ohjaama avaruusalus ja siihen liittyvät metodit
+ */
 public class Pelaaja implements Runnable {
 
     int x, y, ySuunta, xSuunta;
@@ -74,7 +74,7 @@ public class Pelaaja implements Runnable {
                 ammusY = alus.y - 4;
 
                 ammukset.add(new Rectangle(ammusX, ammusY, 3, 5));
-                ammustenAikarajoitin = 50;
+                ammustenAikarajoitin = 150;
             }
         }
     }
@@ -301,6 +301,7 @@ public class Pelaaja implements Runnable {
         } catch (Exception e) {
             System.err.println(e.getMessage());
             Logger.getLogger(Pelaaja.class.getName()).log(Level.SEVERE, null, e);
+            this.run();
         }
     }
 

@@ -1,10 +1,13 @@
-/* 
- * Ohjelman pääluokka, joka käynnistää käyttöliittymän, luo threadit ja käynnistää ne.
- */
+
 package avaruuspeli.avaruuspeli;
 
 import javax.swing.*;
 import kayttoliittyma.Kayttoliittyma;
+
+/* 
+ * Ohjelman pääluokka, joka luo käyttöliittymän, luo tähtien threadin
+ * ja käynnistää sen.
+ */
 
 public class Main extends JFrame {
 

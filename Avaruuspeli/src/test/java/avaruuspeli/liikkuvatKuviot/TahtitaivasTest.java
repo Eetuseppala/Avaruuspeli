@@ -1,5 +1,6 @@
 package avaruuspeli.liikkuvatKuviot;
 
+import avaruuspeli.liikkuvatKuviot.Tahtitaivas;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import org.junit.After;

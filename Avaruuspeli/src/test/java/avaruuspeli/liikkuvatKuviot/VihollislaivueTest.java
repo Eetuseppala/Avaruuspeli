@@ -1,5 +1,7 @@
 package avaruuspeli.liikkuvatKuviot;
 
+import avaruuspeli.liikkuvatKuviot.Asteroidikentta;
+import avaruuspeli.liikkuvatKuviot.Vihollislaivue;
 import java.awt.Rectangle;
 import org.junit.After;
 import org.junit.AfterClass;
