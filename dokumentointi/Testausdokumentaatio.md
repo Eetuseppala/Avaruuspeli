@@ -1,0 +1,3 @@
+Mahdollisista bugeista:
+
+Luulen liiskanneeni suurimman osan bugeista, mutta ennen palautusta on ollut silloin tällöin ongelmia Pelaaja-luokan kahdessa metodissa: osumaAsteroidiin ja osumaViholliseen. Ne ovat molemmat herjanneet NullPointerExceptionia. Joissakin harvoissa tilanteissa kun tämä tapahtuu, on syypäänä olleet Pelaajan ammukset. Näiden ongelmien syy on minulle tuntematon. Ratkaisuja yritin etsiä monelta kantilta ja luulen ainakin, että olen tehnyt tämän tapahtuman harvinaiseksi jos se ei ole kokonaan liiskaantunut.

@@ -46,4 +46,6 @@ Kulutin noin 4 tuntia bugien liiskaamiseen ja testasin ohjelmaa eri tavoilla. Ny
 
 28.4.2014
 
-Yritin generoida javadocia mutta se ei onnistunut. NetBeans ei antanut tehdä sitä (nappi ei painettavissa) ja vaihtoehtoiset ohjeet kurssisivulla eivät toimineet (käytän Windows 8).
+Yritin generoida javadocia mutta se ei onnistunut. NetBeans ei antanut tehdä sitä (nappi ei painettavissa) ja vaihtoehtoiset ohjeet kurssisivulla eivät toimineet (käytän Windows 8). Tein viimeiset muokkaukset koodiin ja loin .jar-tiedoston. Kurssisivun ohjeiden mukaan luotuna .jar-tiedostot eivät toimineet joten tein .jar-tiedoston eri tavalla. Tein uuden luokkakaavion ja vielä yhden sekvenssikaavion. Viimeistelin harjoitustyötäni tekemällä vielä puuttuvat dokumentit (käyttöohjeet, testausdokumentaatio, rakennekuvaus). Aikaa käytetty n. 7 tuntia.
+
+Erittäin karkea arvio tuntimäärästä: ~80h
